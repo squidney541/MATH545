@@ -1,4 +1,4 @@
-# MATH 307 Applied Linear Algebra
+# MATH 545 Applied Linear Algebra
 
 ## Learning Goals
 

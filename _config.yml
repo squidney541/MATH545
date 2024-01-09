@@ -1,5 +1,5 @@
 title: Applied Linear Algebra
-author: UBC Math
+author: UBC Math / Andreas
 logo: img/nn.png
 sphinx:
   config:
@@ -10,8 +10,8 @@ execute:
 html:
   home_page_in_navbar: false
   use_repository_button: true
-  google_analytics_id: G-VXJGYXTXDR
+  google_analytics_id:
 launch_buttons:
-  jupyterhub_url: https://ubc.syzygy.ca/jupyter
+  jupyterhub_url: https://localhost.ca.fixme
 repository:
-  url: https://github.com/UBCMath/math307
+  url: https://github.com/adrs0049/MATH545
