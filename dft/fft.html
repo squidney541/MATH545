@@ -1,0 +1,659 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Fast Fourier Transform &#8212; Applied Linear Algebra</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/main.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/main.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dft/fft';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Convolution and Filtering" href="convolution.html" />
+    <link rel="prev" title="Frequency, Amplitude and Phase" href="frequency.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nn.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/nn.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Systems of Equations</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../systems/lu.html">LU Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems/error.html">Error Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems/interpolation.html">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../systems/odes.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Orthogonality</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/subspaces.html">Subspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/complement.html">Orthogonal Complement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/projection.html">Orthogonal Projection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/qr.html">QR Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/least_squares.html">Least Squares Approximation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Eigenvalues</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eigenvalues/diagonalization.html">Diagonalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eigenvalues/svd.html">Singular Value Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eigenvalues/computing_eigenvalues.html">Computing Eigenvalues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dicrete Fourier Transform</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="complex.html">Complex Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frequency.html">Frequency, Amplitude and Phase</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convolution.html">Convolution and Filtering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Jupyter Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_linear_systems.html">Linear Systems of Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_LU_decomposition.html">LU Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_polynomial_interpolation.html">Polynomial Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_spline_interpolation.html">Natural Cubic Spline Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_finite_difference_method.html">Finite Difference Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_least_squares_regression.html">Fitting Models to Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/07_pca.html">Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/08_deblurring_images.html">Deblurring Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/09_computed_tomography.html">Computed Tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/10_computing_eigenvalues.html">Computing Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_fft.html">Discrete Fourier Transform</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/multiplication.html">Matrix Multiplication</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/adrs0049/MATH545" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/dft/fft.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Fast Fourier Transform</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="fast-fourier-transform">
+<h1>Fast Fourier Transform<a class="headerlink" href="#fast-fourier-transform" title="Permalink to this heading">#</a></h1>
+<div class="bigidea docutils">
+<p>The fast Fourier transform (FFT) is an algorithm for efficiently computing the DFT.</p>
+</div>
+<div class="note docutils">
+<p>Sound signals are commonly sampled at 44.1 kHz (see <a class="reference external" href="https://en.wikipedia.org/wiki/Sampling_(signal_processing)#Audio_sampling">Wikipedia:Audio sampling</a>). Therefore computing the DFT for a one second sound signal requires the Fourier matrix <span class="math notranslate nohighlight">\(F_N\)</span> for <span class="math notranslate nohighlight">\(N=44100\)</span> which has <span class="math notranslate nohighlight">\(44100^2\)</span> entries (that’s approximately 2 billion). Yikes! We need an efficient algorithm to compute the DFT in practice.</p>
+</div>
+<div class="theorem docutils">
+<p>Let <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{C}^N\)</span> be a signal of length <span class="math notranslate nohighlight">\(N\)</span> (and assume <span class="math notranslate nohighlight">\(N\)</span> is even). Then</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathrm{DFT}(\boldsymbol{x}) =
+\renewcommand{\arraystretch}{1.25}
+\left[ \begin{array}{c}
+\mathrm{DFT}(\boldsymbol{x}_{\text{even}}) + D_N \mathrm{DFT}(\boldsymbol{x}_{\text{odd}}) \\
+\mathrm{DFT}(\boldsymbol{x}_{\text{even}}) - D_N \mathrm{DFT}(\boldsymbol{x}_{\text{odd}})
+\end{array} \right]
+=
+\left[ \begin{array}{rr} I &amp; D_N \\ I &amp; - D_N \end{array} \right]
+\left[ \begin{array}{l}
+\mathrm{DFT}(\boldsymbol{x}_{\text{even}}) \\
+\mathrm{DFT}(\boldsymbol{x}_{\text{odd}})
+\end{array} \right]
+\renewcommand{\arraystretch}{1}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\boldsymbol{x}_{\text{even}}\)</span> and <span class="math notranslate nohighlight">\(\boldsymbol{x}_{\text{odd}}\)</span> are vectors of length <span class="math notranslate nohighlight">\(N/2\)</span> consisting of the even and odd indices respectively</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{x}_{\text{even}} = \begin{bmatrix} x_0 \\ x_2 \\ \vdots \\ x_{N-2} \end{bmatrix}
+\hspace{10mm}
+\boldsymbol{x}_{\text{odd}} = \begin{bmatrix} x_1 \\ x_3 \\ \vdots \\ x_{N-1} \end{bmatrix}
+\end{split}\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D_N = \begin{bmatrix} 1 &amp; &amp; &amp; \\ &amp; \omega_N^{-1} &amp; &amp; \\ &amp; &amp; \ddots &amp; \\ &amp; &amp; &amp; \omega_N^{-(N/2-1)} \end{bmatrix}
+\end{split}\]</div>
+<hr class="docutils" />
+<p><em>Proof</em>. Let <span class="math notranslate nohighlight">\(\boldsymbol{y} = \mathrm{DFT}(\boldsymbol{x})\)</span>, look at the <span class="math notranslate nohighlight">\(k\)</span>th entry of <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> and split the sum into the even and odd terms</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\boldsymbol{y}[k] &amp;= \langle \boldsymbol{x} , \boldsymbol{f}_k \rangle = \sum_{n=0}^{N-1} x_n \omega_N^{-nk} \\
+&amp;= \sum_{m=0}^{N/2-1} x_{2m} \omega_N^{-2mk} + \sum_{m=0}^{N/2-1} x_{2m + 1} \omega_N^{-(2m + 1)k}
+\end{align*}
+\end{split}\]</div>
+<p>See that <span class="math notranslate nohighlight">\(\omega_N^2 = e^{(2 \pi i / N)2} = e^{2 \pi i / (N/2)} = \omega_{N/2}\)</span> and write</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{y}[k]= \sum_{m=0}^{N/2-1} x_{2m} \omega_{N/2}^{-mk} + \omega_N^{-k} \sum_{m=0}^{N/2-1} x_{2m + 1} \omega_{N/2}^{-mk}
+\]</div>
+<p>For <span class="math notranslate nohighlight">\(0 \leq k &lt; N/2\)</span>, these are the formulas for DFT of vectors of length <span class="math notranslate nohighlight">\(N/2\)</span> consisting of the even and odd indices respectively</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{x}_{\text{even}} = \begin{bmatrix} x_0 \\ x_2 \\ \vdots \\ x_{N-2} \end{bmatrix}
+\hspace{10mm}
+\boldsymbol{x}_{\text{odd}} = \begin{bmatrix} x_1 \\ x_3 \\ \vdots \\ x_{N-1} \end{bmatrix}
+\end{split}\]</div>
+<p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+\boldsymbol{y}[k + N/2] &amp;= \sum_{m=0}^{N/2-1} x_{2m} \omega_{N/2}^{-m(k + N/2)} + \omega_N^{-(k+N/2)} \sum_{m=0}^{N/2-1} x_{2m + 1} \omega_{N/2}^{-m(k + N/2)} \\
+&amp;= \sum_{m=0}^{N/2-1} x_{2m} \omega_{N/2}^{-mk} \underbrace{\omega_{N/2}^{-mN/2}}_{1} + \omega_N^{-k} \underbrace{\omega_N^{-N/2}}_{-1} \sum_{m=0}^{N/2-1} x_{2m + 1} \omega_{N/2}^{-mk} \underbrace{\omega_{N/2}^{-mN/2}}_{1} \\
+&amp;= \sum_{m=0}^{N/2-1} x_{2m} \omega_{N/2}^{-mk} - \omega_N^{-k} \sum_{m=0}^{N/2-1} x_{2m + 1} \omega_{N/2}^{-mk}
+\end{align*}
+\end{split}\]</div>
+<p>which again are the DFTs of the even and odd parts of <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>. Put these formulas for <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> together to get</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{y} = \mathrm{DFT}(\boldsymbol{x}) =
+\renewcommand{\arraystretch}{1.25}
+\left[ \begin{array}{c}
+\mathrm{DFT}(\boldsymbol{x}_{\text{even}}) + D_N \mathrm{DFT}(\boldsymbol{x}_{\text{odd}}) \\
+\mathrm{DFT}(\boldsymbol{x}_{\text{even}}) - D_N \mathrm{DFT}(\boldsymbol{x}_{\text{odd}})
+\end{array} \right]
+\renewcommand{\arraystretch}{1}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D_N = \begin{bmatrix} 1 &amp; &amp; &amp; \\ &amp; \omega_N^{-1} &amp; &amp; \\ &amp; &amp; \ddots &amp; \\ &amp; &amp; &amp; \omega_N^{-(N/2-1)} \end{bmatrix}
+\end{split}\]</div>
+</div>
+<div class="note docutils">
+<p>This form of the fast Fourier transform is called the <a class="reference external" href="https://en.wikipedia.org/wiki/Cooley%E2%80%93Tukey_FFT_algorithm">Cooley-Tukey algorithm</a>. The point is that the DFT computation for a vector of length <span class="math notranslate nohighlight">\(N\)</span> can be compute by the DFT of two smaller vectors of length <span class="math notranslate nohighlight">\(N/2\)</span> which is faster! And we can keep applying the formulas for smaller and smaller vectors until we are computing the DFT for vectors of size 2 only (if <span class="math notranslate nohighlight">\(N\)</span> is a power of 2). For example, to compute <span class="math notranslate nohighlight">\(\mathrm{DFT}(\boldsymbol{x})\)</span> for <span class="math notranslate nohighlight">\(\boldsymbol{x} \in \mathbb{C}^8\)</span> we visualize the procedure</p>
+<a class="reference internal image-reference" href="../_images/fft.png"><img alt="../_images/fft.png" class="align-center" src="../_images/fft.png" style="width: 600px;" /></a>
+</div>
+<div class="example docutils">
+<p>Use the FFT to compute the DFT of the signal</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{x} = \left[ \begin{array}{r} 1 \\ 1 \\ 1 \\ 1 \\ -1 \\ -1 \\ -1 \\ -1 \end{array} \right]
+\end{split}\]</div>
+<p>The symmetry in the signal reduces the number of computations even further</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{cc}
+\begin{array}{c}
+\begin{bmatrix} x_0 \\ x_4 \end{bmatrix} = \left[ \begin{array}{r} 1 \\ -1 \end{array} \right] \stackrel{\mathrm{DFT}}{\longrightarrow} \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\\
+\begin{bmatrix} x_2 \\ x_6 \end{bmatrix} = \left[ \begin{array}{r} 1 \\ -1 \end{array} \right] \stackrel{\mathrm{DFT}}{\longrightarrow} \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\end{array}
+&amp;
+\longrightarrow
+\left[ \begin{array}{c}
+\left[ \begin{array}{r} 0 \\ 2 \end{array} \right] + \left[ \begin{array}{rr} 1 &amp; \\ &amp; -i \end{array} \right] \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\\
+\left[ \begin{array}{r} 0 \\ 2 \end{array} \right] - \left[ \begin{array}{rr} 1 &amp; \\ &amp; -i \end{array} \right] \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\end{array} \right]
+=
+\left[ \begin{array}{c} 0 \\ 2-2i \\ 0 \\ 2+2i \end{array} \right]
+\\
+\begin{array}{c}
+\begin{bmatrix} x_1 \\ x_5 \end{bmatrix} = \left[ \begin{array}{r} 1 \\ -1 \end{array} \right] \stackrel{\mathrm{DFT}}{\longrightarrow} \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\\
+\begin{bmatrix} x_3 \\ x_7 \end{bmatrix} = \left[ \begin{array}{r} 1 \\ -1 \end{array} \right] \stackrel{\mathrm{DFT}}{\longrightarrow} \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\end{array}
+&amp;
+\longrightarrow
+\left[ \begin{array}{c}
+\left[ \begin{array}{r} 0 \\ 2 \end{array} \right] + \left[ \begin{array}{rr} 1 &amp; \\ &amp; -i \end{array} \right] \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\\
+\left[ \begin{array}{r} 0 \\ 2 \end{array} \right] - \left[ \begin{array}{rr} 1 &amp; \\ &amp; -i \end{array} \right] \left[ \begin{array}{r} 0 \\ 2 \end{array} \right]
+\end{array} \right]
+=
+\left[ \begin{array}{c} 0 \\ 2-2i \\ 0 \\ 2+2i \end{array} \right]
+\end{array}
+\end{split}\]</div>
+<p>We can write the matrix <span class="math notranslate nohighlight">\(D_8\)</span> as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+D_8 = \left[ \begin{array}{rrrr} 1 &amp; &amp; &amp; \\ &amp; e^{- \pi i /4} &amp; &amp; \\ &amp; &amp; e^{- \pi i /2} &amp; \\ &amp; &amp; &amp; e^{- 3\pi i /4} \end{array} \right]
+= \left[ \begin{array}{rrrr} 1 &amp; &amp; &amp; \\ &amp; \frac{1-i}{\sqrt{2}} &amp; &amp; \\ &amp; &amp; -i &amp; \\ &amp; &amp; &amp; \frac{-1-i}{\sqrt{2}} \end{array} \right]
+\end{split}\]</div>
+<p>and then compute</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathrm{DFT}(\boldsymbol{x}) =
+\left[
+\begin{array}{c}
+\left[ \begin{array}{c} 0 \\ 2-2i \\ 0 \\ 2+2i \end{array} \right]
++
+\left[ \begin{array}{rrrr} 1 &amp; &amp; &amp; \\ &amp; \frac{1-i}{\sqrt{2}} &amp; &amp; \\ &amp; &amp; -i &amp; \\ &amp; &amp; &amp; \frac{-1-i}{\sqrt{2}} \end{array} \right]
+\left[ \begin{array}{c} 0 \\ 2-2i \\ 0 \\ 2+2i \end{array} \right]
+\\
+\left[ \begin{array}{c} 0 \\ 2-2i \\ 0 \\ 2+2i \end{array} \right]
+-
+\left[ \begin{array}{rrrr} 1 &amp; &amp; &amp; \\ &amp; \frac{1-i}{\sqrt{2}} &amp; &amp; \\ &amp; &amp; -i &amp; \\ &amp; &amp; &amp; \frac{-1-i}{\sqrt{2}} \end{array} \right]
+\left[ \begin{array}{c} 0 \\ 2-2i \\ 0 \\ 2+2i \end{array} \right]
+\end{array}
+\right]
+=
+\left[ \begin{array}{c} 0 \\ 2 - 2 \left( \sqrt{2} + 1 \right) i \\ 0 \\ 2 - 2 \left( \sqrt{2} - 1 \right) i \\ 0 \\ 2 + 2 \left( \sqrt{2} - 1 \right) i \\ 0 \\ 2 + 2 \left( \sqrt{2} + 1 \right) i  \end{array} \right]
+\end{split}\]</div>
+</div>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<p><strong>Exercise 1.</strong> Let <span class="math notranslate nohighlight">\(\boldsymbol{x} = \begin{bmatrix} 1 &amp; -1 &amp; 2 &amp; 1 \end{bmatrix}^T\)</span>. Compute <span class="math notranslate nohighlight">\(\mathrm{DFT}(\boldsymbol{x})\)</span> using the fast Fourier transform. Compute <span class="math notranslate nohighlight">\(\mathrm{DFT}(\boldsymbol{x})\)</span> also by <span class="math notranslate nohighlight">\(F_4\)</span> and verify it is the same result.</p>
+<p><strong>Exercise 2.</strong> Let <span class="math notranslate nohighlight">\(\boldsymbol{x} = \begin{bmatrix} 1 &amp; 1 &amp; 0 &amp; 2 &amp; 1 &amp; 2 &amp; 0 &amp; -1 \end{bmatrix}^T\)</span>. Compute <span class="math notranslate nohighlight">\(\mathrm{DFT}(\boldsymbol{x})\)</span> using the fast Fourier transform.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./dft"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="frequency.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Frequency, Amplitude and Phase</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="convolution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Convolution and Filtering</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By UBC Math / Andreas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

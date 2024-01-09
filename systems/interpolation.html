@@ -1,0 +1,945 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Interpolation &#8212; Applied Linear Algebra</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/main.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/main.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'systems/interpolation';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Differential Equations" href="odes.html" />
+    <link rel="prev" title="Error Analysis" href="error.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/nn.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/nn.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Systems of Equations</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="lu.html">LU Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="error.html">Error Analysis</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="odes.html">Differential Equations</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Orthogonality</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/subspaces.html">Subspaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/complement.html">Orthogonal Complement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/projection.html">Orthogonal Projection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/qr.html">QR Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../orthogonality/least_squares.html">Least Squares Approximation</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Eigenvalues</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../eigenvalues/diagonalization.html">Diagonalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eigenvalues/svd.html">Singular Value Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../eigenvalues/computing_eigenvalues.html">Computing Eigenvalues</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Dicrete Fourier Transform</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../dft/complex.html">Complex Vectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dft/dft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dft/frequency.html">Frequency, Amplitude and Phase</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dft/fft.html">Fast Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dft/convolution.html">Convolution and Filtering</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Jupyter Notebooks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/01_linear_systems.html">Linear Systems of Equations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/02_LU_decomposition.html">LU Decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/03_polynomial_interpolation.html">Polynomial Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/04_spline_interpolation.html">Natural Cubic Spline Interpolation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/05_finite_difference_method.html">Finite Difference Method</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/06_least_squares_regression.html">Fitting Models to Data</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/07_pca.html">Principal Component Analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/08_deblurring_images.html">Deblurring Images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/09_computed_tomography.html">Computed Tomography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/10_computing_eigenvalues.html">Computing Eigenvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../notebooks/12_fft.html">Discrete Fourier Transform</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/multiplication.html">Matrix Multiplication</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+<a href="https://github.com/adrs0049/MATH545" target="_blank"
+   class="btn btn-sm btn-source-repository-button"
+   title="Source repository"
+   data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/systems/interpolation.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Interpolation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolating-functions">Interpolating Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-interpolation">Polynomial Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cubic-spline-interpolation">Cubic Spline Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="interpolation">
+<h1>Interpolation<a class="headerlink" href="#interpolation" title="Permalink to this heading">#</a></h1>
+<div class="bigidea docutils">
+<p>An interpolating function provides information about values between points and beyond the range of the data. There are infinitely many different ways to interpolate a set of data! Polynomial interpolation is the simplest method whereas cubic spline interpolation provides much more flexibility.</p>
+</div>
+<a class="reference internal image-reference" href="../_images/01_03_01.png"><img alt="../_images/01_03_01.png" class="align-center" src="../_images/01_03_01.png" style="width: 100%;" /></a>
+<section id="interpolating-functions">
+<h2>Interpolating Functions<a class="headerlink" href="#interpolating-functions" title="Permalink to this heading">#</a></h2>
+<div class="definition docutils">
+<p>An <strong>interpolating function</strong> (or <strong>interpolant</strong>) for points <span class="math notranslate nohighlight">\((t_0,y_0),\dots,(t_d,y_d)\)</span> is a function <span class="math notranslate nohighlight">\(f(t)\)</span> such that <span class="math notranslate nohighlight">\(f(t_k) = y_k\)</span> for <span class="math notranslate nohighlight">\(k=0,\dots,d\)</span>.</p>
+</div>
+<div class="note docutils">
+<p>There are <em>infinitely</em> many different interpolating functions for any set of data. We impose different kinds of constraints on the form of the interpolant to ensure there is a unique solution which is meaningful for the data and can be computed efficiently. In the following sections we describe two kinds of interpolation: <em>polynomial interpolation</em> and <em>cubic spline interpolation</em>.</p>
+</div>
+</section>
+<section id="polynomial-interpolation">
+<h2>Polynomial Interpolation<a class="headerlink" href="#polynomial-interpolation" title="Permalink to this heading">#</a></h2>
+<div class="definition docutils">
+<p>A <strong>polynomial</strong> of degree (at most) <span class="math notranslate nohighlight">\(d\)</span> is a function of the form</p>
+<div class="math notranslate nohighlight">
+\[
+p(t)= c_0 + c_1 t + \cdots + c_d t^d
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(c_0,c_1,\dots,c_d \in \mathbb{R}\)</span>. The collection of all polynomials of degree (at most) <span class="math notranslate nohighlight">\(d\)</span> is denoted by</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{P}_d = \{ c_0 + c_1 t + \cdots + c_d t^d : c_0,c_1,\dots,c_d \in \mathbb{R} \}
+\]</div>
+<p>Note that <span class="math notranslate nohighlight">\(\mathbb{P}_d\)</span> is a vector space of dimension <span class="math notranslate nohighlight">\(d+1\)</span>.</p>
+</div>
+<div class="definition docutils">
+<p>Fix a positive integer <span class="math notranslate nohighlight">\(d\)</span> and let <span class="math notranslate nohighlight">\(\phi_k(t) = t^k\)</span> for <span class="math notranslate nohighlight">\(k=0,\dots,d\)</span>. In other words, consider the polynomials</p>
+<div class="math notranslate nohighlight">
+\[
+\phi_0(t) = 1 \ , \ \phi_1(t) = t \ , \ \dots \ , \ \phi_d(t) = t^d
+\]</div>
+<p>Since a polynomial <span class="math notranslate nohighlight">\(p(t)\)</span> of degree (at most) <span class="math notranslate nohighlight">\(d\)</span> is of the form</p>
+<div class="math notranslate nohighlight">
+\[
+p(t) = c_0 \phi_0(t) + c_1 \phi_1(t) + \cdots + c_d \phi_d(t)
+\]</div>
+<p>we see that the polynomials <span class="math notranslate nohighlight">\(\phi_k(t)\)</span> form a basis of <span class="math notranslate nohighlight">\(\mathbb{P}_d\)</span>. The set <span class="math notranslate nohighlight">\(\{ \phi_0(t),\dots,\phi_d(t) \}\)</span> is called the <strong>monomial basis</strong> of <span class="math notranslate nohighlight">\(\mathbb{P}_d\)</span>.</p>
+</div>
+<div class="definition docutils">
+<p>Given <span class="math notranslate nohighlight">\(d+1\)</span> points <span class="math notranslate nohighlight">\((t_0,y_0), \dots,(t_d,y_d)\)</span>, <strong>polynomial interpolation</strong> (with respect to the monomial basis) is a polynomial of the form</p>
+<div class="math notranslate nohighlight">
+\[
+p(t) = c_0 + c_1 t + \cdots + c_d t^d
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(p(t_k) = y_k\)</span> for each <span class="math notranslate nohighlight">\(k=0,\dots,d\)</span>. Each point defines an equation</p>
+<div class="math notranslate nohighlight">
+\[
+p(t_k) = y_k \ \ , \ \ \ k=0,\dots,d
+\]</div>
+<p>therefore the coefficients <span class="math notranslate nohighlight">\(c_0,c_1,\dots,c_d\)</span> satisfy the system of linear equations</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align*}
+c_0 + c_1t_0 + \cdots + c_d t_0^d &amp;= y_0 \\
+c_0 + c_1t_1 + \cdots + c_d t_1^d &amp;= y_1 \\
+&amp; \ \vdots \\
+c_0 + c_1t_d + \cdots + c_d t_d^d &amp;= y_d
+\end{align*}
+\end{split}\]</div>
+<p>In matrix notation, the system is <span class="math notranslate nohighlight">\(A \boldsymbol{c} = \boldsymbol{y}\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = 
+\begin{bmatrix}
+1 &amp; t_0 &amp; \cdots &amp; t_0^d \\
+1 &amp; t_1 &amp; \cdots &amp; t_1^d \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+ 1 &amp; t_d &amp; \cdots &amp; t_d^d
+\end{bmatrix}
+\hspace{10mm}
+\boldsymbol{c} = \begin{bmatrix} c_0 \\ c_1 \\ \vdots \\ c_d \end{bmatrix}
+\hspace{10mm}
+\boldsymbol{y} = \begin{bmatrix} y_0 \\ y_1 \\ \vdots \\ y_d \end{bmatrix}
+\end{split}\]</div>
+<p>The matrix <span class="math notranslate nohighlight">\(A\)</span> is called the <strong>Vandermonde matrix</strong> for <span class="math notranslate nohighlight">\(t_0,\dots,t_d\)</span>.</p>
+</div>
+<div class="theorem docutils">
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be the Vandermonde matrix for points <span class="math notranslate nohighlight">\((t_0,y_0), \dots,(t_d,y_d)\)</span>. Then</p>
+<div class="math notranslate nohighlight">
+\[
+\mathrm{det}(A) = \prod_{0 \leq i &lt; j \leq d} (t_j - t_i)
+\]</div>
+<hr class="docutils" />
+<p><em>Proof</em>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Vandermonde_matrix">Wikipedia:Vandermonde matrix</a> for a proof. Let’s compute the formula for the cases <span class="math notranslate nohighlight">\(d = 1\)</span> and <span class="math notranslate nohighlight">\(d = 2\)</span>. Compute for <span class="math notranslate nohighlight">\(d = 1\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathrm{det} \left( \begin{bmatrix} 1 &amp; t_0 \\ 1 &amp; t_1 \end{bmatrix} \right) = t_1 - t_0
+\end{split}\]</div>
+<p>For <span class="math notranslate nohighlight">\(d=2\)</span>, use <span class="math notranslate nohighlight">\(\mathrm{det}(A) = \mathrm{det}(U)\)</span> from the LU decomposition. Compute</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix} 1 &amp; t_0 &amp; t_0^2 \\ 1 &amp; t_1 &amp; t_1^2 \\ 1 &amp; t_2 &amp; t_2^2 \end{bmatrix}
+\longrightarrow
+\begin{bmatrix} 1 &amp; t_0 &amp; t_0^2 \\ 0 &amp; t_1 - t_0 &amp; t_1^2 - t_0^2 \\ 0 &amp; t_2 - t_0 &amp; t_2^2 - t_0^2 \end{bmatrix}
+\longrightarrow
+\begin{bmatrix} 1 &amp; t_0 &amp; t_0^2 \\ 0 &amp; t_1 - t_0 &amp; t_1^2 - t_0^2 \\ 0 &amp; 0 &amp; * \end{bmatrix}
+\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+* = t_2^2 - t_0^2 - \frac{t_2 - t_0}{t_1 - t_0} (t_1^2 - t_0^2) = (t_2 - t_0)(t_2 - t_1)
+\]</div>
+<p>The determinant is the product of the diagonal entries of <span class="math notranslate nohighlight">\(U\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathrm{det} \left( \begin{bmatrix} 1 &amp; t_0 &amp; t_0^2 \\ 1 &amp; t_1 &amp; t_1^2 \\ 1 &amp; t_2 &amp; t_2^2 \end{bmatrix}
+ \right)
+= (t_1 - t_0)(t_2 - t_0)(t_2 - t_1)
+\end{split}\]</div>
+</div>
+<div class="theorem docutils">
+<p>Consider <span class="math notranslate nohighlight">\(d+1\)</span> data points <span class="math notranslate nohighlight">\((t_0,y_0), \dots , (t_d,y_d)\)</span> such that <span class="math notranslate nohighlight">\(t_i \not= t_j\)</span> for <span class="math notranslate nohighlight">\(i \not= j\)</span>. There exists a unique polynomial <span class="math notranslate nohighlight">\(p(t)\)</span> of degree (at most) <span class="math notranslate nohighlight">\(d\)</span> such that <span class="math notranslate nohighlight">\(p(t_k) = y_k\)</span> for each <span class="math notranslate nohighlight">\(k=0,\dots,d\)</span>.</p>
+<hr class="docutils" />
+<p><em>Proof</em>. The formula for the determinant of the Vandermonde matrix shows that <span class="math notranslate nohighlight">\(\mathrm{det}(A) \ne 0\)</span> when the values <span class="math notranslate nohighlight">\(t_k\)</span> are distinct therefore it is invertible and so there is a unique solution of the system <span class="math notranslate nohighlight">\(A \boldsymbol{c} = \boldsymbol{y}\)</span>.</p>
+</div>
+<div class="example docutils">
+<p>Find the unique polynomial of degree 3 which interpolates the points</p>
+<div class="math notranslate nohighlight">
+\[
+(0,-1),(1,-1),(2,1),(3,-1)
+\]</div>
+<p>Solve the system <span class="math notranslate nohighlight">\(A \boldsymbol{c} = \boldsymbol{y}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A =  
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp;  0 \\
+1 &amp; 1 &amp; 1 &amp;  1 \\
+1 &amp; 2 &amp; 4 &amp;  8 \\
+1 &amp; 3 &amp; 9 &amp; 27
+\end{bmatrix}
+\hspace{20mm}
+\boldsymbol{y} = \left[ \begin{array}{r} -1 \\ -1 \\ 1 \\ -1 \end{array} \right]
+\end{split}\]</div>
+<p>Let’s compute the LU decomposition of the Vandermonde matrix <span class="math notranslate nohighlight">\(A\)</span> so that we can reuse the result in other examples</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+L =  
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+1 &amp; 1 &amp; 0 &amp; 0 \\
+1 &amp; 2 &amp; 1 &amp; 0 \\
+1 &amp; 3 &amp; 3 &amp; 1
+\end{bmatrix}
+\hspace{10mm}
+U =
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 1 &amp; 1 \\
+0 &amp; 0 &amp; 2 &amp; 6 \\
+0 &amp; 0 &amp; 0 &amp; 6
+\end{bmatrix}
+\end{split}\]</div>
+<p>Solve the systems <span class="math notranslate nohighlight">\(L \boldsymbol{x} = \boldsymbol{y}\)</span> and <span class="math notranslate nohighlight">\(U \boldsymbol{c} = \boldsymbol{x}\)</span> to find</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\boldsymbol{c} = \left[ \begin{array}{r} -1 \\ -3 \\ 4 \\ -1 \end{array} \right]
+\end{split}\]</div>
+<p>Therefore the interpolating polynomial is</p>
+<div class="math notranslate nohighlight">
+\[
+p(t) = -1 - 3t + 4t^2 - t^3
+\]</div>
+<a class="reference internal image-reference" href="../_images/01_03_02.png"><img alt="../_images/01_03_02.png" class="align-center" src="../_images/01_03_02.png" style="width: 500px;" /></a>
+</div>
+<div class="note docutils">
+<p>The condition number of a Vandermonde matrix gets <em>very</em> large as the size of the matrix increases. This means that interpolation by the monomial basis is very sensitive to changes in the data for polynomials of large degree. For example, for <span class="math notranslate nohighlight">\(11\)</span> equally spaced points <span class="math notranslate nohighlight">\(t_0=0,\dots,t_{10}=10\)</span>, the Vandermonde matrix <span class="math notranslate nohighlight">\(A\)</span> is 11 by 11 and has condition number larger than <span class="math notranslate nohighlight">\(10^{12}\)</span>. Yikes!</p>
+<a class="reference internal image-reference" href="../_images/01_03_03.png"><img alt="../_images/01_03_03.png" class="align-center" src="../_images/01_03_03.png" style="width: 500px;" /></a>
+</div>
+</section>
+<section id="cubic-spline-interpolation">
+<h2>Cubic Spline Interpolation<a class="headerlink" href="#cubic-spline-interpolation" title="Permalink to this heading">#</a></h2>
+<div class="definition docutils">
+<p>Consider <span class="math notranslate nohighlight">\(N+1\)</span> points <span class="math notranslate nohighlight">\((t_0,y_0),\dots,(t_N,y_N)\)</span>. A <strong>cubic spline</strong> is a function <span class="math notranslate nohighlight">\(p(t)\)</span> defined piecewise by <span class="math notranslate nohighlight">\(N\)</span> cubic polynomials <span class="math notranslate nohighlight">\(p_1(t),\dots,p_N(t)\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+p_k(t) = a_k(t - t_{k-1})^3 + b_k(t - t_{k-1})^2 + c_k(t - t_{k-1}) + d_k \ \ , \ \ t \in [t_{k-1},t_k]
+\]</div>
+<p>such that <span class="math notranslate nohighlight">\(p(t)\)</span>, <span class="math notranslate nohighlight">\(p'(t)\)</span> and <span class="math notranslate nohighlight">\(p''(t)\)</span> are continuous functions.</p>
+</div>
+<div class="note docutils">
+<p>Each polynomial <span class="math notranslate nohighlight">\(p_k(t)\)</span> is defined by four coefficients <span class="math notranslate nohighlight">\(a_k,b_k,c_k,d_k\)</span> therefore we require <span class="math notranslate nohighlight">\(4N\)</span> equations to specify the <span class="math notranslate nohighlight">\(4N\)</span> unknowns.</p>
+<p>Interpolation at left endpoints yields <span class="math notranslate nohighlight">\(N\)</span> equations:</p>
+<div class="math notranslate nohighlight">
+\[
+p_k(t_{k-1}) = y_{k-1} \ \ , \ \ \ k=1,\dots,N
+\]</div>
+<p>Interpolation at right endpoints yields <span class="math notranslate nohighlight">\(N\)</span> equations:</p>
+<div class="math notranslate nohighlight">
+\[
+p_k(t_k) = y_k \ \ , \ \ \ k=1,\dots,N
+\]</div>
+<p>Continuity of <span class="math notranslate nohighlight">\(p'(t)\)</span> yields <span class="math notranslate nohighlight">\(N-1\)</span> equations:</p>
+<div class="math notranslate nohighlight">
+\[
+p_k'(t_k) = p_{k+1}'(t_k) \ \ , \ \ \ k=1,\dots,N-1
+\]</div>
+<p>Continuity of <span class="math notranslate nohighlight">\(p''(t)\)</span> yields <span class="math notranslate nohighlight">\(N-1\)</span> equations:</p>
+<div class="math notranslate nohighlight">
+\[
+p_k''(t_k) = p_{k+1}''(t_k) \ \ , \ \ \ k=1,\dots,N-1
+\]</div>
+<p>The conditions impose only <span class="math notranslate nohighlight">\(4N-2\)</span> equations therefore we need 2 more to determine the cubic spline uniquely. There are different choices such as the natural spline and the “not-a-knot” condition.</p>
+</div>
+<div class="definition docutils">
+<p>A <strong>natural cubic spline</strong> satisfies <span class="math notranslate nohighlight">\(p''_1(t_0) = p''_N(t_N) = 0\)</span>.</p>
+</div>
+<div class="definition docutils">
+<p>Represent a cubic spline <span class="math notranslate nohighlight">\(p(t)\)</span> by the <strong>coefficient matrix</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C=
+\begin{bmatrix}
+a_1 &amp; a_2 &amp; \cdots &amp; a_N \\
+b_1 &amp; b_2 &amp; \cdots &amp; b_N \\
+c_1 &amp; c_2 &amp; \cdots &amp; c_N \\
+d_1 &amp; d_2 &amp; \cdots &amp; d_N
+\end{bmatrix}
+\end{split}\]</div>
+<p>where the <span class="math notranslate nohighlight">\(k\)</span>th column of <span class="math notranslate nohighlight">\(C\)</span> consists of the coefficients for the <span class="math notranslate nohighlight">\(k\)</span>th cubic polynomial in the spline</p>
+<div class="math notranslate nohighlight">
+\[
+p_k(t) = a_k(t - t_{k-1})^3 + b_k(t - t_{k-1})^2 + c_k(t - t_{k-1}) + d_k \ \ , \ \ t \in [t_{k-1},t_k]
+\]</div>
+</div>
+<div class="theorem docutils">
+<p>Consider <span class="math notranslate nohighlight">\(N+1\)</span> points <span class="math notranslate nohighlight">\((t_0,y_0),\dots,(t_N,y_N)\)</span> (with <span class="math notranslate nohighlight">\(t_i \not= t_j\)</span> for <span class="math notranslate nohighlight">\(i \not= j\)</span>). The unique natural cubic spline <span class="math notranslate nohighlight">\(p(t)\)</span> which interpolates the points is given by the coefficient matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C=
+\begin{bmatrix}
+a_1 &amp; a_2 &amp; \cdots &amp; a_N \\
+b_1 &amp; b_2 &amp; \cdots &amp; b_N \\
+c_1 &amp; c_2 &amp; \cdots &amp; c_N \\
+d_1 &amp; d_2 &amp; \cdots &amp; d_N
+\end{bmatrix}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(d_k = y_{k-1}\)</span> for <span class="math notranslate nohighlight">\(k=1,\dots,N\)</span> and the coefficients <span class="math notranslate nohighlight">\(a_1,b_1,c_1,\dots,a_N,b_N,c_N\)</span> are the solution of the linear system</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\renewcommand{\arraystretch}{1.5}
+\left[ \begin{array}{c|c|c|c|c}
+A(L_1) &amp; B &amp; &amp; &amp; \\ \hline
+&amp; A(L_2) &amp; B &amp; &amp; \\ \hline
+&amp; &amp; \ddots &amp; \ddots &amp; \phantom{A(L_{N-1})} \\ \hline
+\phantom{A(L_{N-1})} &amp; \phantom{A(L_{N-1})} &amp; \phantom{A(L_{N-1})} &amp; A(L_{N-1}) &amp; B \\ \hline
+T &amp; &amp; &amp; &amp; V
+\end{array} \right]
+\renewcommand{\arraystretch}{1}
+\begin{bmatrix} a_1 \\ b_1 \\ c_1 \\ \vdots \\ a_N \\ b_N \\ c_N \end{bmatrix}
+=
+\begin{bmatrix} y_1 - y_0 \\ 0 \\ 0 \\ \vdots \\ y_N - y_{N-1} \\ 0 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(L_k = t_k - t_{k-1}\)</span> is the length of the subinterval <span class="math notranslate nohighlight">\([t_{k-1},t_k]\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A(L) = \begin{bmatrix} L^3 &amp; L^2 &amp; L \\ 3L^2 &amp; 2L &amp; 1 \\ 6L &amp; 2 &amp; 0 \end{bmatrix}
+\ \
+B = \left[ \begin{array}{rrr} 0 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; -1 \\ 0 &amp; -2 &amp; 0 \end{array} \right]
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+T = \begin{bmatrix} 0 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 0 \end{bmatrix}
+\ \
+V = \begin{bmatrix} L_N^3 &amp; L_N^2 &amp; L_N \\ 0 &amp; 0 &amp; 0 \\ 6L_N &amp; 2 &amp; 0 \end{bmatrix}
+\end{split}\]</div>
+</div>
+<div class="example docutils">
+<p>Construct the natural cubic spline interpolating points</p>
+<div class="math notranslate nohighlight">
+\[
+(0,0),(1,2),(2,1),(3,3),(4,2),(5,4),(6,2),(7,3),(8,1),(9,2),(10,0)
+\]</div>
+<a class="reference internal image-reference" href="../_images/01_03_04.png"><img alt="../_images/01_03_04.png" class="align-center" src="../_images/01_03_04.png" style="width: 500px;" /></a>
+</div>
+<div class="example docutils">
+<p>Let <span class="math notranslate nohighlight">\(p(t)\)</span> be the natural cubic spline which interpolates the data</p>
+<div class="math notranslate nohighlight">
+\[
+(0, 1) \ , \ (1, 3) \ , \ (2, 8) \ , \ (3, 10) \ , \ (4, 9) \ , \ (5,-1) \ , \ (6,-17)
+\]</div>
+<p>Suppose the coefficient matrix of <span class="math notranslate nohighlight">\(p(t)\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C = \left[ \begin{array}{rrrrrr}
+1 &amp; -2 &amp; 1 &amp; \phantom{+}a_4 &amp; 1 &amp; 1 \\
+0 &amp; 3 &amp; -3 &amp; b_4 &amp; -6 &amp; -3 \\
+1 &amp; 4 &amp; 4 &amp; c_4 &amp; -5 &amp; -14 \\
+1 &amp; 3 &amp; 8 &amp; 10 &amp; 9 &amp; -1
+\end{array} \right]
+\end{split}\]</div>
+<p>Determine the coefficients <span class="math notranslate nohighlight">\(a_4, b_4, c_4\)</span>, then compute the value <span class="math notranslate nohighlight">\(p''(2.5)\)</span>.</p>
+<p>First note that the <span class="math notranslate nohighlight">\(t\)</span> values are equally spaced thefore <span class="math notranslate nohighlight">\(L_k = t_k - t_{k-1} = 1\)</span> for each <span class="math notranslate nohighlight">\(k\)</span>. Continuity of <span class="math notranslate nohighlight">\(p(t)\)</span>, <span class="math notranslate nohighlight">\(p'(t)\)</span> and <span class="math notranslate nohighlight">\(p''(t)\)</span> yields equations</p>
+<div class="math notranslate nohighlight">
+\[
+p_k(t_k) = p_{k+1}(t_k) \ \ \Rightarrow \ \ a_k + b_k + c_k + d_k = d_{k+1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+p'_k(t_k) = p'_{k+1}(t_k) \ \ \Rightarrow \ \ 3a_k + 2b_k + c_k = c_{k+1}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+p''_k(t_k) = p''_{k+1}(t_k) \ \ \Rightarrow \ \ 6a_k + 2b_k = 2b_{k+1}
+\]</div>
+<p>Therefore <span class="math notranslate nohighlight">\(6a_3 + 2b_3 = 2b_4\)</span> implies <span class="math notranslate nohighlight">\(b_4 = 0\)</span>, the equation <span class="math notranslate nohighlight">\(3a_3 + 2b_3 + c_3 = c_4\)</span> implies <span class="math notranslate nohighlight">\(c_4 = 1\)</span> and finally <span class="math notranslate nohighlight">\(6a_4 + 2b_4 = 2b_5\)</span> implies <span class="math notranslate nohighlight">\(a_4 = -2\)</span>.</p>
+<p>The value <span class="math notranslate nohighlight">\(t=2.5\)</span> lies in the interval <span class="math notranslate nohighlight">\([t_2,t_3]\)</span> therefore we compute</p>
+<div class="math notranslate nohighlight">
+\[
+p''(2.5) = p_3''(2.5) = 6a_3(2.5 - 2) + 2b_3 = -3
+\]</div>
+<a class="reference internal image-reference" href="../_images/01_03_05.png"><img alt="../_images/01_03_05.png" class="align-center" src="../_images/01_03_05.png" style="width: 500px;" /></a>
+</div>
+<div class="note docutils">
+<p>The condition number of the matrix for constructing the natural cubic spline does not increase as drastically with the number of points <span class="math notranslate nohighlight">\(N+1\)</span> as compared with the Vandermonde matrix. For example, for <span class="math notranslate nohighlight">\(11\)</span> equally spaced points <span class="math notranslate nohighlight">\(t_0=0,\dots,t_{10}=10\)</span>, the Vandermonde matrix is 11 by 11 and has <span class="math notranslate nohighlight">\(\mathrm{cond}(A) \approx 10^{12}\)</span> whereas the cubic spline matrix is 30 by 30 and the condition number is only around <span class="math notranslate nohighlight">\(33\)</span>.</p>
+<a class="reference internal image-reference" href="../_images/01_03_06.png"><img alt="../_images/01_03_06.png" class="align-center" src="../_images/01_03_06.png" style="width: 500px;" /></a>
+</div>
+</section>
+<section id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this heading">#</a></h2>
+<div class="exercise docutils">
+<p>Consider <span class="math notranslate nohighlight">\(d\)</span> data points <span class="math notranslate nohighlight">\((t_1,y_1),\dots,(t_d,y_d)\)</span> such that <span class="math notranslate nohighlight">\(t_i \not= t_j\)</span> for <span class="math notranslate nohighlight">\(i \ne j\)</span>. Determine whether the statement is <strong>True</strong> or <strong>False</strong>.</p>
+<ul class="simple">
+<li><p>There exists a unique polynomial of degree (at most) <span class="math notranslate nohighlight">\(d-1\)</span> which interpolates the data.</p></li>
+<li><p>There exists a unique polynomial <span class="math notranslate nohighlight">\(p(t)\)</span> of degree (at most) <span class="math notranslate nohighlight">\(d\)</span> which interpolates the data and also satisfies <span class="math notranslate nohighlight">\(p'(t_1)=0\)</span> and <span class="math notranslate nohighlight">\(p''(t_1)=0\)</span>.</p></li>
+<li><p>There exists a unique polynomial <span class="math notranslate nohighlight">\(p(t)\)</span> of degree (at most) <span class="math notranslate nohighlight">\(d\)</span> which interpolates the data and <span class="math notranslate nohighlight">\(p'(t_1)=0\)</span>.</p></li>
+</ul>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<ul class="simple">
+<li><p class="sd-card-text">True</p></li>
+<li><p class="sd-card-text">False</p></li>
+<li><p class="sd-card-text">True</p></li>
+</ul>
+</div>
+</details></div>
+<div class="exercise docutils">
+<p>Consider <span class="math notranslate nohighlight">\(N+1\)</span> data points <span class="math notranslate nohighlight">\((t_0,y_0),\dots,(t_N,y_N)\)</span>. Let <span class="math notranslate nohighlight">\(A_1 \boldsymbol{c}_1 = \boldsymbol{b}_1\)</span> such that the solution <span class="math notranslate nohighlight">\(\boldsymbol{c}_1\)</span> consists of the coefficients of the interpolating polynomial with respect to the monomial basis. Let <span class="math notranslate nohighlight">\(A_2 \boldsymbol{c}_2 = \boldsymbol{b}_2\)</span> such that the solution <span class="math notranslate nohighlight">\(\boldsymbol{c}_2\)</span> consists of the coefficients of the interpolating natural cubic spline. Do we expect <span class="math notranslate nohighlight">\(\mathrm{cond}(A_1) &lt; \mathrm{cond}(A_2)\)</span> or <span class="math notranslate nohighlight">\(\mathrm{cond}(A_1) &gt; \mathrm{cond}(A_2)\)</span> for large values of <span class="math notranslate nohighlight">\(N\)</span>? Explain.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">We expect <span class="math notranslate nohighlight">\(\mathrm{cond}(A_1) &gt; \mathrm{cond}(A_2)\)</span>.</p>
+</div>
+</details></div>
+<div class="exercise docutils">
+<p>Suppose we have 4 points <span class="math notranslate nohighlight">\((0,y_0),(1,y_1),(2,y_2),(3,y_3)\)</span> and we want to interpolate the data using a spline <span class="math notranslate nohighlight">\(p(t)\)</span> constructed from <span class="math notranslate nohighlight">\(3\)</span> degree 2 polynomials <span class="math notranslate nohighlight">\(p_1,p_2,p_3\)</span> where</p>
+<div class="math notranslate nohighlight">
+\[
+p_k(t) = a_k(t - t_{k-1})^2 + b_k(t - t_{k-1}) + c_k \ \ , \ \ t \in [t_{k-1},t_k]
+\]</div>
+<p>We require that <span class="math notranslate nohighlight">\(p(t)\)</span> and <span class="math notranslate nohighlight">\(p'(t)\)</span> are continuous and <span class="math notranslate nohighlight">\(p''(t_0)=0\)</span>. Setup a linear system <span class="math notranslate nohighlight">\(A \boldsymbol{x} = \boldsymbol{b}\)</span> where the solution is</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{x} = \begin{bmatrix} a_1 &amp; b_1 &amp; a_2 &amp; b_2 &amp; a_3 &amp; b_3 \end{bmatrix}^T
+\]</div>
+<p>Note: the system depends on the unspecified values <span class="math notranslate nohighlight">\(y_0,y_1,y_2,y_3\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<div class="math notranslate nohighlight">
+\[\begin{split}
+A = \left[ \begin{array}{rrrrrr}
+1 &amp; \phantom{+}1 &amp; \phantom{+}0 &amp;  0 &amp; \phantom{+}0 &amp;  0 \\
+0 &amp; 0 &amp; 1 &amp;  1 &amp; 0 &amp;  0 \\
+0 &amp; 0 &amp; 0 &amp;  0 &amp; 1 &amp;  1 \\
+2 &amp; 1 &amp; 0 &amp; -1 &amp; 0 &amp;  0 \\
+0 &amp; 0 &amp; 2 &amp;  1 &amp; 0 &amp; -1 \\
+1 &amp; 0 &amp; 0 &amp;  0 &amp; 0 &amp;  0
+\end{array} \right]
+\hspace{10mm}
+\boldsymbol{b} = \begin{bmatrix} y_1 - y_0 \\ y_2 - y_1 \\ y_3 - y_2 \\ 0 \\ 0 \\ 0 \end{bmatrix}
+\end{split}\]</div>
+</div>
+</details></div>
+<div class="exercise docutils">
+<p>Suppose a cubic spline <span class="math notranslate nohighlight">\(p(t)\)</span> interpolates the data</p>
+<div class="math notranslate nohighlight">
+\[
+(0.0,1.0),(1.0,3.0),(2.0,1.0),(3.0,1.0),(4.0,2.0),(5.0,1.0)
+\]</div>
+<p>and <span class="math notranslate nohighlight">\(p(t)\)</span> has coefficient matrix (rounded to 2 decimal places)</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\left[\begin{array}{rrrrr}
+-1.19 &amp; 1.93 &amp; a_3 &amp; -0.75 &amp; 0.55 \\
+0.00 &amp; -3.56 &amp; b_3 &amp; 0.60 &amp; -1.65 \\
+3.19 &amp; -0.37 &amp; c_3 &amp; 1.15 &amp; 0.10\\
+1.00 &amp; 3.00 &amp; 1.00 &amp; 1.00 &amp; 2.00
+\end{array} \right]
+\end{split}\]</div>
+<p>Determine the coefficients <span class="math notranslate nohighlight">\(a_3,b_3,c_3\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(a_3 = -0.55\)</span>, <span class="math notranslate nohighlight">\(b_3 = 2.24\)</span>, <span class="math notranslate nohighlight">\(c_3 = -1.69\)</span></p>
+</div>
+</details></div>
+<div class="exercise docutils">
+<p>Consider the natural cubic spline <span class="math notranslate nohighlight">\(p(t)\)</span> represented by the coefficient matrix</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+C = \left[ \begin{array}{rrrrrrr}
+3 &amp; a_2 &amp; 2 &amp; -4 &amp; -2 &amp; -2 &amp; 8 \\
+0 &amp; 9 &amp; b_3 &amp; b_4 &amp; b_5 &amp; -18 &amp; -24 \\
+0 &amp; 9 &amp; 12 &amp; 6 &amp; c_5 &amp; -36 &amp; -78 \\
+0 &amp; 3 &amp; 16 &amp; 24 &amp; d_5 &amp; 6 &amp; -50
+\end{array} \right]
+\end{split}\]</div>
+<p>where <span class="math notranslate nohighlight">\(t_0 = 0,t_1 = 1,t_2 = 2,t_3 = 3,t_4 = 4,t_5 = 5,t_6 = 6,t_7 = 7\)</span>. Find the value <span class="math notranslate nohighlight">\(b_4\)</span> and compute <span class="math notranslate nohighlight">\(p''(5.5)\)</span>.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+Solution<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text"><span class="math notranslate nohighlight">\(b_4 = 0\)</span>, <span class="math notranslate nohighlight">\(p''(5.5) = -42\)</span></p>
+</div>
+</details></div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./systems"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="error.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Error Analysis</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="odes.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Differential Equations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpolating-functions">Interpolating Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#polynomial-interpolation">Polynomial Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cubic-spline-interpolation">Cubic Spline Interpolation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By UBC Math / Andreas
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
