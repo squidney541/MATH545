@@ -1,6 +1,6 @@
 # Gaussian Elimination
 
- a matrix $A$ and vector $b$ we assemble its augmented matrix
+Given a $n\times n$ matrix $A$ and vector $b$ we assemble its augmented matrix
 and proceed through the following sequence, until the final augmented
 matrix is upper triangular.
 
