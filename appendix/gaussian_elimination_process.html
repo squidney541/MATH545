@@ -377,19 +377,20 @@ and proceed through the following sequence, until the final augmented
 matrix is upper triangular.</p>
 <div class="math notranslate nohighlight">
 \[
-    \begin{amatrix}{1}
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A &amp; b
-    \end{amatrix} \mapsto
-    \begin{amatrix}{1}
+    \end{array}\right)
+    \mapsto
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A^{(1)} &amp; b^{(1)}
-    \end{amatrix} \mapsto
-    \begin{amatrix}{1}
+    \end{array}\right) \mapsto
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A^{(2)} &amp; b^{(2)}
-    \end{amatrix} \mapsto
+    \end{array}\right) \mapsto
     \dots \mapsto
-    \begin{amatrix}{1}
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A^{(n-1)} &amp; b^{(n-1)}
-    \end{amatrix}
+    \end{array}\right)
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(A^{(n-1)} = U\)</span> is upper triangular. In more detail, at
 each step of this process we eliminate the elements in column
@@ -399,15 +400,15 @@ each step of this process we eliminate the elements in column
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-    \begin{amatrix}{1}
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A &amp; b
-    \end{amatrix} =
-    \begin{amatrix}{4}
+    \end{array}\right) =
+    \left(\begin{array}{&#64;{}*{4}{c}|c&#64;{}}
         a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} &amp; b_1 \\
         a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} &amp; b_2 \\
         \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
         a_{n1} &amp; a_{n2} &amp; \dots &amp; a_{nn} &amp; b_n \\
-    \end{amatrix}
+    \end{array}\right)
 \end{split}\]</div>
 <p>We then eliminate the elements in the first column below
 the main diagonal by:
@@ -433,15 +434,15 @@ $$
 <p>This results in the new augmented matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-    \begin{amatrix}{1}
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A^{(1)} &amp; b^{(1)}
-    \end{amatrix} =
-    \begin{amatrix}{4}
+    \end{array}\right) =
+    \left(\begin{array}{&#64;{}*{4}{c}|c&#64;{}}
         a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} &amp; b_1 \\
         0 &amp; a_{22}^{(1)} &amp; \dots &amp; a_{2n}^{(1)} &amp; b_2^{(1)} \\
         \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
         0 &amp; a_{n2}^{(1)} &amp; \dots &amp; a_{nn}^{(1)} &amp; b_n^{(1)} \\
-    \end{amatrix}
+    \end{array}\right)
 \end{split}\]</div>
 <ol class="arabic simple" start="2">
 <li><p>Next consider the <span class="math notranslate nohighlight">\((n-1)\times n\)</span> sub-matrix found by ignoring the first row and column of the matrix above. Then repeat the process of eliminating the first column of this sub-matrix.
@@ -449,16 +450,16 @@ This gives us</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-    \begin{amatrix}{1}
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A^{(2)} &amp; b^{(2)}
-    \end{amatrix} =
-    \begin{amatrix}{5}
+    \end{array}\right) =
+    \left(\begin{array}{&#64;{}*{5}{c}|c&#64;{}}
         a_{11}  &amp; a_{12}        &amp; \dots         &amp; \dots     &amp; a_{1n}        &amp; b_1 \\
         0       &amp; a_{22}^{(1)}  &amp; a_{23}^{(1)}  &amp; \dots     &amp; a_{2n}^{(1)}  &amp; b_2^{(1)} \\
         0       &amp; 0             &amp; a_{33}^{(2)}  &amp; \dots     &amp; a_{3n}^{(2)}  &amp; b_3^{(2)} \\
         \vdots  &amp; \vdots        &amp; \vdots        &amp; \ddots    &amp; \vdots        &amp; \vdots \\
         0       &amp; 0             &amp; a_{n3}^{(2)}  &amp; \dots     &amp; a_{nn}^{(2)}  &amp; b_n^{(2)} \\
-    \end{amatrix}
+    \end{array}\right)
 \end{split}\]</div>
 <ol class="arabic simple" start="2">
 <li><p>Repeat the previous steps until …</p></li>
@@ -466,16 +467,16 @@ This gives us</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-    \begin{amatrix}{1}
+    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
         A^{(n-1)} &amp; b^{(n-1)}
-    \end{amatrix} =
-    \begin{amatrix}{5}
+    \end{array}\right) =
+    \left(\begin{array}{&#64;{}*{5}{c}|c&#64;{}}
         a_{11}  &amp; a_{12}        &amp; \dots         &amp; \dots     &amp; a_{1n}            &amp; b_1 \\
         0       &amp; a_{22}^{(1)}  &amp; a_{23}^{(1)}  &amp; \dots     &amp; a_{2n}^{(1)}      &amp; b_2^{(1)} \\
         0       &amp; 0             &amp; a_{33}^{(2)}  &amp; \dots     &amp; a_{3n}^{(2)}      &amp; b_3^{(2)} \\
         \vdots  &amp; \vdots        &amp; \vdots        &amp; \ddots    &amp; \vdots            &amp; \vdots \\
         0       &amp; 0             &amp; 0             &amp; \dots     &amp; a_{nn}^{(n-1)}    &amp; b_n^{(n-1)} \\
-    \end{amatrix}
+    \end{array}\right)
 \end{split}\]</div>
 <p>What is the cost of Gaussian Elimination? The matrix
 <span class="math notranslate nohighlight">\(\begin{amatrix}{1} A &amp; b \end{amatrix}\)</span> has size <span class="math notranslate nohighlight">\(n \times ( n + 1 )\)</span>.
