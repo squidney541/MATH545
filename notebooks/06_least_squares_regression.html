@@ -206,6 +206,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../appendix/multiplication.html">Matrix Multiplication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/solving_special_matrices.html">Solving diagonal matrices</a></li>
+
 </ul>
 
     </div>
@@ -516,7 +518,7 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2a10bc618519ad0427f2f0ec4bb13b74cfea8cb68ebd45bb0ded17e5f9f6f7e4.png" src="../_images/2a10bc618519ad0427f2f0ec4bb13b74cfea8cb68ebd45bb0ded17e5f9f6f7e4.png" />
+<img alt="../_images/f577237084d234cc4b4d6591818ae5d2a8106a85144e66d5a43ba1bfbf9f7e87.png" src="../_images/f577237084d234cc4b4d6591818ae5d2a8106a85144e66d5a43ba1bfbf9f7e87.png" />
 </div>
 </div>
 <p>Let’s use linear regression to retrieve the coefficients <span class="math notranslate nohighlight">\(c_0\)</span> and <span class="math notranslate nohighlight">\(c_1\)</span>. Construct the matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
@@ -541,11 +543,11 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.21644033],
-       [1.        , 0.66514493],
-       [1.        , 0.65270889],
-       [1.        , 0.65159508],
-       [1.        , 0.16079234]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.07862468],
+       [1.        , 0.0966693 ],
+       [1.        , 0.2910656 ],
+       [1.        , 0.80300528],
+       [1.        , 0.57637524]])
 </pre></div>
 </div>
 </div>
@@ -559,7 +561,7 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 6.99138486 -3.94292745]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 6.98282665 -3.96349659]
 </pre></div>
 </div>
 </div>
@@ -576,7 +578,7 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/147454cb9ed19ade81e2fd3b91437e0a857ec328be54432ac610f7a0259788b1.png" src="../_images/147454cb9ed19ade81e2fd3b91437e0a857ec328be54432ac610f7a0259788b1.png" />
+<img alt="../_images/27210b17f34e7a514f5f55ab962f81ed509ed0182076d3bb9b028561df50ba2e.png" src="../_images/27210b17f34e7a514f5f55ab962f81ed509ed0182076d3bb9b028561df50ba2e.png" />
 </div>
 </div>
 </section>
@@ -644,7 +646,7 @@ cd_d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c1581b332414fe822f43b71d8fa873ea8d42d024102b009807074752d24eb41f.png" src="../_images/c1581b332414fe822f43b71d8fa873ea8d42d024102b009807074752d24eb41f.png" />
+<img alt="../_images/6df97e66ac24282bad3cbaad354af9b5682f05af4e0104966c290cfd44f5272e.png" src="../_images/6df97e66ac24282bad3cbaad354af9b5682f05af4e0104966c290cfd44f5272e.png" />
 </div>
 </div>
 <p>Construct the matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
@@ -675,7 +677,7 @@ cd_d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/674a3049acd8b5bd7f9b8becc21a01451b5b813069215383017d1fb53924e37f.png" src="../_images/674a3049acd8b5bd7f9b8becc21a01451b5b813069215383017d1fb53924e37f.png" />
+<img alt="../_images/002aff764713e488d0c8224a4cc04ef136bd467e5bfbbc90c4d9fac07283b6f2.png" src="../_images/002aff764713e488d0c8224a4cc04ef136bd467e5bfbbc90c4d9fac07283b6f2.png" />
 </div>
 </div>
 <p>Let’s solve again but this time we use the QR decomposition:</p>
@@ -700,7 +702,7 @@ cd_d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/674a3049acd8b5bd7f9b8becc21a01451b5b813069215383017d1fb53924e37f.png" src="../_images/674a3049acd8b5bd7f9b8becc21a01451b5b813069215383017d1fb53924e37f.png" />
+<img alt="../_images/002aff764713e488d0c8224a4cc04ef136bd467e5bfbbc90c4d9fac07283b6f2.png" src="../_images/002aff764713e488d0c8224a4cc04ef136bd467e5bfbbc90c4d9fac07283b6f2.png" />
 </div>
 </div>
 </section>
