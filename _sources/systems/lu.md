@@ -69,7 +69,7 @@ Symbol $\times$ denotes a nonzero entry and $*$ is any value.
 ```
 
 ```{div} definition
-The **Gaussian elimination algorithm** applies a sequence of elementary row operations to transform a matrix to row echelon form. See [Wikipedia:Gaussian Elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) to review how the algorithm works.
+The **Gaussian elimination algorithm** applies a sequence of elementary row operations to transform a matrix to row echelon form. See [Wikipedia:Gaussian Elimination](https://en.wikipedia.org/wiki/Gaussian_elimination) or [Gaussian Elimination Process](appendix/gaussian_elimination_process.md) to review how the algorithm works.
 ```
 
 ```{div} definition
