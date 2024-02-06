@@ -5,19 +5,20 @@ and proceed through the following sequence, until the final augmented
 matrix is upper triangular.
 
 $$
-    \begin{amatrix}{1}
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A & b
-    \end{amatrix} \mapsto
-    \begin{amatrix}{1}
+    \end{array}\right)
+    \mapsto
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(1)} & b^{(1)}
-    \end{amatrix} \mapsto
-    \begin{amatrix}{1}
+    \end{array}\right) \mapsto
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(2)} & b^{(2)}
-    \end{amatrix} \mapsto
+    \end{array}\right) \mapsto
     \dots \mapsto
-    \begin{amatrix}{1}
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(n-1)} & b^{(n-1)}
-    \end{amatrix}
+    \end{array}\right)
 $$
 
 where $A^{(n-1)} = U$ is upper triangular. In more detail, at
@@ -27,15 +28,15 @@ $i$ below the diagonal.
 1. The process begins with the matrix
 
 $$
-    \begin{amatrix}{1}
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A & b
-    \end{amatrix} =
-    \begin{amatrix}{4}
+    \end{array}\right) =
+    \left(\begin{array}{@{}*{4}{c}|c@{}}
         a_{11} & a_{12} & \dots & a_{1n} & b_1 \\
         a_{21} & a_{22} & \dots & a_{2n} & b_2 \\
         \vdots & \vdots & \ddots & \vdots & \vdots \\
         a_{n1} & a_{n2} & \dots & a_{nn} & b_n \\
-    \end{amatrix}
+    \end{array}\right)
 $$
 
 We then eliminate the elements in the first column below
@@ -62,47 +63,47 @@ the main diagonal by:
 This results in the new augmented matrix
 
 $$
-    \begin{amatrix}{1}
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(1)} & b^{(1)}
-    \end{amatrix} =
-    \begin{amatrix}{4}
+    \end{array}\right) =
+    \left(\begin{array}{@{}*{4}{c}|c@{}}
         a_{11} & a_{12} & \dots & a_{1n} & b_1 \\
         0 & a_{22}^{(1)} & \dots & a_{2n}^{(1)} & b_2^{(1)} \\
         \vdots & \vdots & \ddots & \vdots & \vdots \\
         0 & a_{n2}^{(1)} & \dots & a_{nn}^{(1)} & b_n^{(1)} \\
-    \end{amatrix}
+    \end{array}\right)
 $$
 
 2. Next consider the $(n-1)\times n$ sub-matrix found by ignoring the first row and column of the matrix above. Then repeat the process of eliminating the first column of this sub-matrix.
 This gives us
 
 $$
-    \begin{amatrix}{1}
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(2)} & b^{(2)}
-    \end{amatrix} =
-    \begin{amatrix}{5}
+    \end{array}\right) =
+    \left(\begin{array}{@{}*{5}{c}|c@{}}
         a_{11}  & a_{12}        & \dots         & \dots     & a_{1n}        & b_1 \\
         0       & a_{22}^{(1)}  & a_{23}^{(1)}  & \dots     & a_{2n}^{(1)}  & b_2^{(1)} \\
         0       & 0             & a_{33}^{(2)}  & \dots     & a_{3n}^{(2)}  & b_3^{(2)} \\
         \vdots  & \vdots        & \vdots        & \ddots    & \vdots        & \vdots \\
         0       & 0             & a_{n3}^{(2)}  & \dots     & a_{nn}^{(2)}  & b_n^{(2)} \\
-    \end{amatrix}
+    \end{array}\right)
 $$
 
 2. Repeat the previous steps until ...
 3. We repeat this process $(n-1)$-times until we find
 
 $$
-    \begin{amatrix}{1}
+    \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(n-1)} & b^{(n-1)}
-    \end{amatrix} =
-    \begin{amatrix}{5}
+    \end{array}\right) =
+    \left(\begin{array}{@{}*{5}{c}|c@{}}
         a_{11}  & a_{12}        & \dots         & \dots     & a_{1n}            & b_1 \\
         0       & a_{22}^{(1)}  & a_{23}^{(1)}  & \dots     & a_{2n}^{(1)}      & b_2^{(1)} \\
         0       & 0             & a_{33}^{(2)}  & \dots     & a_{3n}^{(2)}      & b_3^{(2)} \\
         \vdots  & \vdots        & \vdots        & \ddots    & \vdots            & \vdots \\
         0       & 0             & 0             & \dots     & a_{nn}^{(n-1)}    & b_n^{(n-1)} \\
-    \end{amatrix}
+    \end{array}\right)
 $$
 
 What is the cost of Gaussian Elimination? The matrix
