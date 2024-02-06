@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Solving diagonal matrices &#8212; Applied Linear Algebra</title>
+    <title>Solving special matrices &#8212; Applied Linear Algebra</title>
   
   
   
@@ -205,8 +205,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="multiplication.html">Matrix Multiplication</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solving diagonal matrices</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Solving special matrices</a></li>
 </ul>
 
     </div>
@@ -358,7 +357,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Solving diagonal matrices</h1>
+    <h1>Solving special matrices</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -368,10 +367,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Solving diagonal matrices</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-triangular-matrices">Solving triangular matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-diagonal-matrices">Solving diagonal matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-triangular-matrices-backward-substitution">Upper triangular matrices (Backward Substitution)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lower-triangular-matrices-forward-substitution">Lower triangular matrices (Forward Substitution)</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -382,8 +381,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="solving-diagonal-matrices">
-<h1>Solving diagonal matrices<a class="headerlink" href="#solving-diagonal-matrices" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="solving-special-matrices">
+<h1>Solving special matrices<a class="headerlink" href="#solving-special-matrices" title="Permalink to this heading">#</a></h1>
+<section id="solving-diagonal-matrices">
+<h2>Solving diagonal matrices<a class="headerlink" href="#solving-diagonal-matrices" title="Permalink to this heading">#</a></h2>
 <div class="problem docutils">
 <p>Let <span class="math notranslate nohighlight">\(\boldsymbol{D}\)</span> be a diagonal <span class="math notranslate nohighlight">\(n \times n\)</span> matrix i.e. the only non-zero elements are those on the main diagonal
 of the matrix.</p>
@@ -407,9 +408,10 @@ of the matrix.</p>
     d_i x_i = b_i\ \forall i \quad\implies\quad x_i = \frac{b_i}{d_i}\ \forall i.
 \]</div>
 </div>
+<p>The cost of this algorithm is <span class="math notranslate nohighlight">\(n\)</span> floating point operations.</p>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="solving-triangular-matrices">
-<h1>Solving triangular matrices<a class="headerlink" href="#solving-triangular-matrices" title="Permalink to this heading">#</a></h1>
+<section id="upper-triangular-matrices-backward-substitution">
+<h2>Upper triangular matrices (Backward Substitution)<a class="headerlink" href="#upper-triangular-matrices-backward-substitution" title="Permalink to this heading">#</a></h2>
 <div class="problem docutils">
 <p>Let <span class="math notranslate nohighlight">\(\boldsymbol{U}\)</span> be an upper triangular <span class="math notranslate nohighlight">\(n \times n\)</span> matrix i.e. all elements below the main-diagonal are zero.</p>
 <div class="math notranslate nohighlight">
@@ -452,6 +454,60 @@ until we arrive at the ``top most row’’, leading to the following algorithm.
     x_i = \frac{b_i - \displaystyle\sum_{j=i+1}^{n} u_{ij} x_{j}}{u_{ii}}
 \]</div>
 </div>
+<p>What is the cost of this algorithm? We count the number of floating point operations (flops):</p>
+<div class="math notranslate nohighlight">
+\[
+    1 + \sum_{k=1}^{n-1} ((n-k) + (n - k) + 1) = \sum_{k=1}^{n}(2(n-k) + 1) = n^2.
+\]</div>
+<p>Thus solving an upper triangular <span class="math notranslate nohighlight">\(n \times n\)</span> matrix costs <span class="math notranslate nohighlight">\(n^2\)</span> floating point operations.</p>
+</section>
+<section id="lower-triangular-matrices-forward-substitution">
+<h2>Lower triangular matrices (Forward Substitution)<a class="headerlink" href="#lower-triangular-matrices-forward-substitution" title="Permalink to this heading">#</a></h2>
+<p>Consider the case when <span class="math notranslate nohighlight">\(\boldsymbo{L}\)</span> is lower triangular. Note that <span class="math notranslate nohighlight">\(\boldsymbo{L} = \boldsymbol{U}^T\)</span>, so we
+could simply take the transpose and apply the algorithm for upper triangular matrices.
+However, since this is such a fundamental algorithm we present it in full detail.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \boldsymbo{L}\boldsymbol{x} =
+    \begin{pmatrix}
+        l_{11}   &amp;      0 &amp; 0          &amp; \cdots     &amp; 0  \\
+        l_{21}   &amp; l_{22} &amp; 0          &amp; \cdots     &amp; 0  \\
+        \vdots   &amp;        &amp; \ddots     &amp;            &amp; \vdots \\
+        l_{n-11} &amp; \cdots &amp; l_{n-2n-1} &amp; l_{n-1n-1} &amp; 0 \\
+        l_{n1}   &amp; \cdots &amp; l_{n-2n}   &amp; l_{nn-1}   &amp; l_{nn}
+    \end{pmatrix}
+    \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_{n-1} \\ x_n \end{pmatrix}
+    =
+    \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_{n-1} \\ b_n \end{pmatrix}
+\end{split}\]</div>
+<p>Note how the pattern here is different compared to the upper triangular case. We
+essentially flip our strategy around. Starting with the first equation (i.e. first row)
+we can write</p>
+<div class="math notranslate nohighlight">
+\[
+    x_1 = \frac{b_1}{l_{11}}.
+\]</div>
+<p>Then consider the second equation (\aka the second row).
+This row now reads</p>
+<div class="math notranslate nohighlight">
+\[
+    l_{21} x_1 + l_{22} x_2 = b_2.
+\]</div>
+<p>Note that since we already know <span class="math notranslate nohighlight">\(x_1\)</span> this is a single linear equation for a
+single unknown, hence we can solve for <span class="math notranslate nohighlight">\(x_{2}\)</span>. This gives us</p>
+<div class="math notranslate nohighlight">
+\[
+    x_{2} = \frac{b_{2} - l_{21} x_1}{l_{22}}.
+\]</div>
+<p>Next consider the next row down, once again we find a linear equation with
+a single unknown <span class="math notranslate nohighlight">\(x_{3}\)</span> for which we can solve. We can repeat this procedure
+until we arrive at the last row, leading to the following algorithm.</p>
+<div class="math notranslate nohighlight">
+\[
+    x_i = \frac{b_i - \displaystyle\sum_{j=1}^{i-1} l_{ij} x_{j}}{l_{ii}}
+\]</div>
+<p>The cost of this algorithm is also <span class="math notranslate nohighlight">\(n^2\)</span>, the same as the cost for solving an upper triangular matrix.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -512,10 +568,10 @@ until we arrive at the ``top most row’’, leading to the following algorithm.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Solving diagonal matrices</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-triangular-matrices">Solving triangular matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solving-diagonal-matrices">Solving diagonal matrices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upper-triangular-matrices-backward-substitution">Upper triangular matrices (Backward Substitution)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lower-triangular-matrices-forward-substitution">Lower triangular matrices (Forward Substitution)</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>

@@ -1,7 +1,6 @@
+# Solving special matrices
 
-
-
-# Solving diagonal matrices
+## Solving diagonal matrices
 
 ```{div} Problem
 Let $\boldsymbol{D}$ be a diagonal $n \times n$ matrix i.e. the only non-zero elements are those on the main diagonal
@@ -29,8 +28,9 @@ $$
 $$
 ```
 
+The cost of this algorithm is $n$ floating point operations.
 
-# Solving triangular matrices
+## Upper triangular matrices (Backward Substitution)
 
 ```{div} Problem
 
@@ -79,3 +79,63 @@ $$
     x_i = \frac{b_i - \displaystyle\sum_{j=i+1}^{n} u_{ij} x_{j}}{u_{ii}}
 $$
 ```
+
+What is the cost of this algorithm? We count the number of floating point operations (flops):
+
+$$
+    1 + \sum_{k=1}^{n-1} ((n-k) + (n - k) + 1) = \sum_{k=1}^{n}(2(n-k) + 1) = n^2.
+$$
+
+Thus solving an upper triangular $n \times n$ matrix costs $n^2$ floating point operations.
+
+## Lower triangular matrices (Forward Substitution)
+
+Consider the case when $\boldsymbo{L}$ is lower triangular. Note that $\boldsymbo{L} = \boldsymbol{U}^T$, so we
+could simply take the transpose and apply the algorithm for upper triangular matrices.
+However, since this is such a fundamental algorithm we present it in full detail.
+
+$$
+    \boldsymbo{L}\boldsymbol{x} =
+    \begin{pmatrix}
+        l_{11}   &      0 & 0          & \cdots     & 0  \\
+        l_{21}   & l_{22} & 0          & \cdots     & 0  \\
+        \vdots   &        & \ddots     &            & \vdots \\
+        l_{n-11} & \cdots & l_{n-2n-1} & l_{n-1n-1} & 0 \\
+        l_{n1}   & \cdots & l_{n-2n}   & l_{nn-1}   & l_{nn}
+    \end{pmatrix}
+    \begin{pmatrix} x_1 \\ x_2 \\ \vdots \\ x_{n-1} \\ x_n \end{pmatrix}
+    =
+    \begin{pmatrix} b_1 \\ b_2 \\ \vdots \\ b_{n-1} \\ b_n \end{pmatrix}
+$$
+
+Note how the pattern here is different compared to the upper triangular case. We
+essentially flip our strategy around. Starting with the first equation (i.e. first row)
+we can write
+
+$$
+    x_1 = \frac{b_1}{l_{11}}.
+$$
+
+Then consider the second equation (\aka the second row).
+This row now reads
+
+$$
+    l_{21} x_1 + l_{22} x_2 = b_2.
+$$
+
+Note that since we already know $x_1$ this is a single linear equation for a
+single unknown, hence we can solve for $x_{2}$. This gives us
+
+$$
+    x_{2} = \frac{b_{2} - l_{21} x_1}{l_{22}}.
+$$
+
+Next consider the next row down, once again we find a linear equation with
+a single unknown $x_{3}$ for which we can solve. We can repeat this procedure
+until we arrive at the last row, leading to the following algorithm.
+
+$$
+    x_i = \frac{b_i - \displaystyle\sum_{j=1}^{i-1} l_{ij} x_{j}}{l_{ii}}
+$$
+
+The cost of this algorithm is also $n^2$, the same as the cost for solving an upper triangular matrix.
