@@ -90,12 +90,12 @@ Thus solving an upper triangular $n \times n$ matrix costs $n^2$ floating point 
 
 ## Lower triangular matrices (Forward Substitution)
 
-Consider the case when $\boldsymbo{L}$ is lower triangular. Note that $\boldsymbo{L} = \boldsymbol{U}^T$, so we
+Consider the case when $\boldsymbol{L}$ is lower triangular. Note that $\boldsymbol{L} = \boldsymbol{U}^T$, so we
 could simply take the transpose and apply the algorithm for upper triangular matrices.
 However, since this is such a fundamental algorithm we present it in full detail.
 
 $$
-    \boldsymbo{L}\boldsymbol{x} =
+    \boldsymbol{L}\boldsymbol{x} =
     \begin{pmatrix}
         l_{11}   &      0 & 0          & \cdots     & 0  \\
         l_{21}   & l_{22} & 0          & \cdots     & 0  \\
