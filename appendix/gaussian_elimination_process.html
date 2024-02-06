@@ -396,40 +396,36 @@ matrix is upper triangular.</p>
 each step of this process we eliminate the elements in column
 <span class="math notranslate nohighlight">\(i\)</span> below the diagonal.</p>
 <ol class="arabic simple">
-<li><p>The process begins with the matrix</p></li>
+<li><p>The process begins with the matrix
+$<span class="math notranslate nohighlight">\(
+ \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
+     A &amp; b
+ \end{array}\right) =
+ \left(\begin{array}{&#64;{}*{4}{c}|c&#64;{}}
+     a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} &amp; b_1 \\
+     a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} &amp; b_2 \\
+     \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+     a_{n1} &amp; a_{n2} &amp; \dots &amp; a_{nn} &amp; b_n \\
+ \end{array}\right)
+\)</span>$
+We then eliminate the elements in the first column below the main diagonal by:</p>
+<ol class="arabic simple">
+<li><p>Subtracting <span class="math notranslate nohighlight">\(\frac{a_{21}}{a_{11}}\)</span> times the first row from the second row. In other words,
+$<span class="math notranslate nohighlight">\(
+ R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
+\)</span>$</p></li>
+<li><p>Subtracting <span class="math notranslate nohighlight">\(\frac{a_{31}}{a_{11}}\)</span> times the first row from the second row. In other words,
+$<span class="math notranslate nohighlight">\(
+ R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
+\)</span>$</p></li>
+<li><p>And so on until …</p></li>
+<li><p>Subtracting <span class="math notranslate nohighlight">\(\frac{a_{n1}}{a_{11}}\)</span> times the first row from the second row. In other words,
+$<span class="math notranslate nohighlight">\(
+ R_n \mapsto R_n - \frac{a_{n1}}{a_{11}}R_1.
+\)</span>$</p></li>
 </ol>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-    \left(\begin{array}{&#64;{}*{1}{c}|c&#64;{}}
-        A &amp; b
-    \end{array}\right) =
-    \left(\begin{array}{&#64;{}*{4}{c}|c&#64;{}}
-        a_{11} &amp; a_{12} &amp; \dots &amp; a_{1n} &amp; b_1 \\
-        a_{21} &amp; a_{22} &amp; \dots &amp; a_{2n} &amp; b_2 \\
-        \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
-        a_{n1} &amp; a_{n2} &amp; \dots &amp; a_{nn} &amp; b_n \\
-    \end{array}\right)
-\end{split}\]</div>
-<p>We then eliminate the elements in the first column below the main diagonal by:
-1. Subtracting <span class="math notranslate nohighlight">\(\frac{a_{21}}{a_{11}}\)</span> times the first row from the second row. In other words,</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$
-    R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
-$$
-
-2. Subtracting $\frac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
-
-$$
-    R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
-$$
-
-3. And so on until ...
-4. Subtracting $\frac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
-
-$$
-    R_n \mapsto R_n - \frac{a_{n1}}{a_{11}}R_1.
-$$
-</pre></div>
-</div>
+</li>
+</ol>
 <p>This results in the new augmented matrix</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}

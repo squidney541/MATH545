@@ -26,7 +26,6 @@ each step of this process we eliminate the elements in column
 $i$ below the diagonal.
 
 1. The process begins with the matrix
-
 $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
         A & b
@@ -38,23 +37,17 @@ $$
         a_{n1} & a_{n2} & \dots & a_{nn} & b_n \\
     \end{array}\right)
 $$
-
 We then eliminate the elements in the first column below the main diagonal by:
     1. Subtracting $\frac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
-
     $$
         R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
     $$
-
     2. Subtracting $\frac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
-
     $$
         R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
     $$
-
     3. And so on until ...
     4. Subtracting $\frac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
-
     $$
         R_n \mapsto R_n - \frac{a_{n1}}{a_{11}}R_1.
     $$
