@@ -39,22 +39,22 @@ $$
     \end{array}\right)
 $$
 
-We then eliminate the elements in the first column below
-the main diagonal by:
-    1. Subtracting $\ifrac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
+We then eliminate the elements in the first column below the main diagonal by:
+
+    1. Subtracting $\frac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
 
     $$
         R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
     $$
 
-    2. Subtracting $\ifrac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
+    2. Subtracting $\frac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
 
     $$
         R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
     $$
 
     3. And so on until ...
-    4. Subtracting $\ifrac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
+    4. Subtracting $\frac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
 
     $$
         R_n \mapsto R_n - \frac{a_{n1}}{a_{11}}R_1.
@@ -127,7 +127,7 @@ for each individual step of Gaussian elimination to find
 
 $$
 \begin{aligned}
-    2\sum_{k=1}^n \lb k^2 - 1\rb &= 2\sum_{k=1}^n k^2 - 2\sum_{k=1}^n 1
+    2\sum_{k=1}^n \left( k^2 - 1\right) &= 2\sum_{k=1}^n k^2 - 2\sum_{k=1}^n 1
         = \frac{1}{3} n(n+1)(2n+1) - 2n \\
         % = \frac{1}{3} n (2n^2 + 3n + 1)
         &= \frac{2}{3}n^3 + n^2 - \frac{5}{3} n.
