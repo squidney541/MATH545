@@ -25,7 +25,7 @@ where $A^{(n-1)} = U$ is upper triangular. In more detail, at
 each step of this process we eliminate the elements in column
 $i$ below the diagonal.
 
-## Step 1:
+## Step 1: Eliminate the first column
 
 The process begins with the matrix
 
@@ -43,25 +43,21 @@ $$
 
 We then eliminate the elements in the first column below the main diagonal by:
 
-### Step 1A:
+**Step 1A**:
 Subtracting $\frac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
 
 $$
     R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
 $$
 
-### Step 1B:
+**Step 1B**:
 Subtracting $\frac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
 
 $$
     R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
 $$
 
-### Step 1C,D,...
-
-And so on until ...
-
-### Step 1: Final
+**And so on until ...**
 
 Subtracting $\frac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
 
@@ -75,7 +71,7 @@ $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(1)} & b^{(1)}
     \end{array}\right) =
-    \left(\begin{array}{@{}*{4}{c}|c@{}}
+    \left(\begin{array}{cccc|c}
         a_{11} & a_{12} & \dots & a_{1n} & b_1 \\
         0 & a_{22}^{(1)} & \dots & a_{2n}^{(1)} & b_2^{(1)} \\
         \vdots & \vdots & \ddots & \vdots & \vdots \\
@@ -83,7 +79,8 @@ $$
     \end{array}\right)
 $$
 
-## Step 2:
+## Step 2: Eliminate the second column
+
 Next consider the $(n-1)\times n$ sub-matrix found by ignoring the first row and column of the matrix above. Then repeat the process of eliminating the first column of this sub-matrix.
 This gives us
 
@@ -91,7 +88,7 @@ $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(2)} & b^{(2)}
     \end{array}\right) =
-    \left(\begin{array}{@{}*{5}{c}|c@{}}
+    \left(\begin{array}{ccccc|c}
         a_{11}  & a_{12}        & \dots         & \dots     & a_{1n}        & b_1 \\
         0       & a_{22}^{(1)}  & a_{23}^{(1)}  & \dots     & a_{2n}^{(1)}  & b_2^{(1)} \\
         0       & 0             & a_{33}^{(2)}  & \dots     & a_{3n}^{(2)}  & b_3^{(2)} \\
@@ -100,11 +97,9 @@ $$
     \end{array}\right)
 $$
 
-## Steps 3,4,...
+**Repeat the previous steps until ...**
 
-Repeat the previous steps until ...
-
-### Step n-1:
+### Step n-1: Eliminate the second to last column
 
 We repeat this process $(n-1)$-times until we find
 
@@ -112,7 +107,7 @@ $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
         A^{(n-1)} & b^{(n-1)}
     \end{array}\right) =
-    \left(\begin{array}{@{}*{5}{c}|c@{}}
+    \left(\begin{array}{ccccc|c}
         a_{11}  & a_{12}        & \dots         & \dots     & a_{1n}            & b_1 \\
         0       & a_{22}^{(1)}  & a_{23}^{(1)}  & \dots     & a_{2n}^{(1)}      & b_2^{(1)} \\
         0       & 0             & a_{33}^{(2)}  & \dots     & a_{3n}^{(2)}      & b_3^{(2)} \\
