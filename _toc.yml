@@ -43,3 +43,4 @@ parts:
     chapters:
     - file: appendix/multiplication.md
     - file: appendix/solving_special_matrices.md
+    - file: appendix/guassian_elimination_process.md
