@@ -40,7 +40,6 @@ $$
 $$
 
 We then eliminate the elements in the first column below the main diagonal by:
-
     1. Subtracting $\frac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
 
     $$
