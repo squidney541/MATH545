@@ -463,12 +463,12 @@ until we arrive at the ``top most row’’, leading to the following algorithm.
 </section>
 <section id="lower-triangular-matrices-forward-substitution">
 <h2>Lower triangular matrices (Forward Substitution)<a class="headerlink" href="#lower-triangular-matrices-forward-substitution" title="Permalink to this heading">#</a></h2>
-<p>Consider the case when <span class="math notranslate nohighlight">\(\boldsymbo{L}\)</span> is lower triangular. Note that <span class="math notranslate nohighlight">\(\boldsymbo{L} = \boldsymbol{U}^T\)</span>, so we
+<p>Consider the case when <span class="math notranslate nohighlight">\(\boldsymbol{L}\)</span> is lower triangular. Note that <span class="math notranslate nohighlight">\(\boldsymbol{L} = \boldsymbol{U}^T\)</span>, so we
 could simply take the transpose and apply the algorithm for upper triangular matrices.
 However, since this is such a fundamental algorithm we present it in full detail.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
-    \boldsymbo{L}\boldsymbol{x} =
+    \boldsymbol{L}\boldsymbol{x} =
     \begin{pmatrix}
         l_{11}   &amp;      0 &amp; 0          &amp; \cdots     &amp; 0  \\
         l_{21}   &amp; l_{22} &amp; 0          &amp; \cdots     &amp; 0  \\
