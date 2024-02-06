@@ -25,7 +25,10 @@ where $A^{(n-1)} = U$ is upper triangular. In more detail, at
 each step of this process we eliminate the elements in column
 $i$ below the diagonal.
 
-1. The process begins with the matrix
+## Step 1:
+
+The process begins with the matrix
+
 $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
         A & b
@@ -37,20 +40,34 @@ $$
         a_{n1} & a_{n2} & \dots & a_{nn} & b_n \\
     \end{array}\right)
 $$
+
 We then eliminate the elements in the first column below the main diagonal by:
-    1. Subtracting $\frac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
-    $$
-        R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
-    $$
-    2. Subtracting $\frac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
-    $$
-        R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
-    $$
-    3. And so on until ...
-    4. Subtracting $\frac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
-    $$
-        R_n \mapsto R_n - \frac{a_{n1}}{a_{11}}R_1.
-    $$
+
+### Step 1A:
+Subtracting $\frac{a_{21}}{a_{11}}$ times the first row from the second row. In other words,
+
+$$
+    R_2 \mapsto R_2 - \frac{a_{21}}{a_{11}}R_1.
+$$
+
+### Step 1B:
+Subtracting $\frac{a_{31}}{a_{11}}$ times the first row from the second row. In other words,
+
+$$
+    R_3 \mapsto R_3 - \frac{a_{31}}{a_{11}}R_1.
+$$
+
+### Step 1C,D,...
+
+And so on until ...
+
+### Step 1: Final
+
+Subtracting $\frac{a_{n1}}{a_{11}}$ times the first row from the second row. In other words,
+
+$$
+    R_n \mapsto R_n - \frac{a_{n1}}{a_{11}}R_1.
+$$
 
 This results in the new augmented matrix
 
@@ -66,7 +83,8 @@ $$
     \end{array}\right)
 $$
 
-2. Next consider the $(n-1)\times n$ sub-matrix found by ignoring the first row and column of the matrix above. Then repeat the process of eliminating the first column of this sub-matrix.
+## Step 2:
+Next consider the $(n-1)\times n$ sub-matrix found by ignoring the first row and column of the matrix above. Then repeat the process of eliminating the first column of this sub-matrix.
 This gives us
 
 $$
@@ -82,8 +100,13 @@ $$
     \end{array}\right)
 $$
 
-2. Repeat the previous steps until ...
-3. We repeat this process $(n-1)$-times until we find
+## Steps 3,4,...
+
+Repeat the previous steps until ...
+
+### Step n-1:
+
+We repeat this process $(n-1)$-times until we find
 
 $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
@@ -98,8 +121,10 @@ $$
     \end{array}\right)
 $$
 
+## Algorithm cost
+
 What is the cost of Gaussian Elimination? The matrix
-$\begin{amatrix}{1} A & b \end{amatrix}$ has size $n \times ( n + 1 )$.
+$\left(\begin{array}{@{}*{1}{c}|c@{}} A & b \end{array}\right)$ has size $n \times ( n + 1 )$.
 The first step is the  most expensive. We need to eliminate $n-1$
 non-zero elements, via $n-1$ row operations. That's a total of
 
