@@ -99,7 +99,7 @@ $$
 
 **Repeat the previous steps until ...**
 
-### Step n-1: Eliminate the second to last column
+## Step n-1: Eliminate the second to last column
 
 We repeat this process $(n-1)$-times until we find
 
