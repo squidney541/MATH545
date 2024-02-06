@@ -33,7 +33,7 @@ $$
     \left(\begin{array}{@{}*{1}{c}|c@{}}
         A & b
     \end{array}\right) =
-    \left(\begin{array}{@{}*{4}{c}|c@{}}
+    \left(\begin{array}{cccc|c}
         a_{11} & a_{12} & \dots & a_{1n} & b_1 \\
         a_{21} & a_{22} & \dots & a_{2n} & b_2 \\
         \vdots & \vdots & \ddots & \vdots & \vdots \\
