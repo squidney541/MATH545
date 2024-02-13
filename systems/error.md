@@ -58,7 +58,7 @@ $$
 ```
 
 ```{div} example
-The unit ball in $\mathbb{R}^n$ relative to a norm $\| \cdot \|$ is the set of unit vectors
+The unit sphere in $\mathbb{R}^n$ relative to a norm $\| \cdot \|$ is the set of unit vectors
 
 $$
 B = \{ \boldsymbol{x} \in \mathbb{R}^n : \| \boldsymbol{x} \| = 1 \}
@@ -220,7 +220,7 @@ $$
 \frac{\| \Delta \boldsymbol{x} \|}{\| \boldsymbol{x} \|} \leq \mathrm{cond}(A) \frac{\| \Delta \boldsymbol{b} \|}{\| \boldsymbol{b} \|}
 $$
 
-```{dropdown} Proof 
+```{dropdown} Proof
 Since $A \boldsymbol{x} = \boldsymbol{b}$, we have $\Delta x = A^{-1} \Delta \boldsymbol{b}$. Computing norms we find
 
 $$
