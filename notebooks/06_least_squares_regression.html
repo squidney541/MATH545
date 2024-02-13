@@ -202,6 +202,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="09_computed_tomography.html">Computed Tomography</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_computing_eigenvalues.html">Computing Eigenvalues</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_fft.html">Discrete Fourier Transform</a></li>
+<li class="toctree-l1"><a class="reference internal" href="GaussianElimination.html">Special solving functions</a></li>
+
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -518,7 +520,7 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/371f3120e088dd18fd711643bbd14dd024a2d1a8dda1f2582a07a0c5e079dd0e.png" src="../_images/371f3120e088dd18fd711643bbd14dd024a2d1a8dda1f2582a07a0c5e079dd0e.png" />
+<img alt="../_images/4850287d230892ca8a4586a79422f543644ae443e5dba5c617e9452a7a2783bf.png" src="../_images/4850287d230892ca8a4586a79422f543644ae443e5dba5c617e9452a7a2783bf.png" />
 </div>
 </div>
 <p>Let’s use linear regression to retrieve the coefficients <span class="math notranslate nohighlight">\(c_0\)</span> and <span class="math notranslate nohighlight">\(c_1\)</span>. Construct the matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
@@ -543,11 +545,11 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.60218498],
-       [1.        , 0.61986426],
-       [1.        , 0.16354033],
-       [1.        , 0.34519368],
-       [1.        , 0.43609331]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.79602835],
+       [1.        , 0.97728458],
+       [1.        , 0.17982856],
+       [1.        , 0.27266028],
+       [1.        , 0.81832539]])
 </pre></div>
 </div>
 </div>
@@ -561,7 +563,7 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 6.97812258 -3.96991234]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 7.05612864 -4.07639163]
 </pre></div>
 </div>
 </div>
@@ -578,7 +580,7 @@ y = c_0 + c_1 t + \epsilon
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6d6d2139bbada40477d086ffd4049af82e09fddb8bdb01a18a47e670982f2b8b.png" src="../_images/6d6d2139bbada40477d086ffd4049af82e09fddb8bdb01a18a47e670982f2b8b.png" />
+<img alt="../_images/1183c9e404429277be46886a7e4b403eabbc56516dc09958d1f9cefef6285e8e.png" src="../_images/1183c9e404429277be46886a7e4b403eabbc56516dc09958d1f9cefef6285e8e.png" />
 </div>
 </div>
 </section>
@@ -646,7 +648,7 @@ cd_d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/98613c9db7803c174baa8ee2bc47180ef8c40f5439ac1bca9a4e0e00a626a859.png" src="../_images/98613c9db7803c174baa8ee2bc47180ef8c40f5439ac1bca9a4e0e00a626a859.png" />
+<img alt="../_images/5edcf0cd09791fa9db466bbdab1a470b0e27e8bd01fd098fe2889667aae6484a.png" src="../_images/5edcf0cd09791fa9db466bbdab1a470b0e27e8bd01fd098fe2889667aae6484a.png" />
 </div>
 </div>
 <p>Construct the matrix <span class="math notranslate nohighlight">\(A\)</span>:</p>
@@ -677,7 +679,7 @@ cd_d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/655f8af66ba5534690b3f7db3bfb5e1e766c0cd5d26d72f9ebba117fd9c93662.png" src="../_images/655f8af66ba5534690b3f7db3bfb5e1e766c0cd5d26d72f9ebba117fd9c93662.png" />
+<img alt="../_images/de1d5affe183ca2bd631e8943b64963ccdbd87750a7d01df54ed4213fd826522.png" src="../_images/de1d5affe183ca2bd631e8943b64963ccdbd87750a7d01df54ed4213fd826522.png" />
 </div>
 </div>
 <p>Let’s solve again but this time we use the QR decomposition:</p>
@@ -702,7 +704,7 @@ cd_d
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/655f8af66ba5534690b3f7db3bfb5e1e766c0cd5d26d72f9ebba117fd9c93662.png" src="../_images/655f8af66ba5534690b3f7db3bfb5e1e766c0cd5d26d72f9ebba117fd9c93662.png" />
+<img alt="../_images/de1d5affe183ca2bd631e8943b64963ccdbd87750a7d01df54ed4213fd826522.png" src="../_images/de1d5affe183ca2bd631e8943b64963ccdbd87750a7d01df54ed4213fd826522.png" />
 </div>
 </div>
 </section>
