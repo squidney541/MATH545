@@ -120,6 +120,14 @@ where $\| \cdot \|$ is the 2-norm.
 The operator norm satisies the property $\| A \boldsymbol{x} \| \leq \| A \| \| \boldsymbol{x} \|$ for all $\boldsymbol{x} \in \mathbb{R}^n$.
 ```
 
+```{div} lemma
+An operator norm is a matrix norm.
+```
+
+```{div} note
+The operator norm and the previous result gives us most of the matrix norms used in practice.
+```
+
 ````{div} theorem
 Let $A$ be a nonsingular matrix. Then
 
