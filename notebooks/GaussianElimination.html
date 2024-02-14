@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Special solving functions &#8212; Applied Linear Algebra</title>
+    <title>Gaussian Elimination &#8212; Applied Linear Algebra</title>
   
   
   
@@ -200,8 +200,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="09_computed_tomography.html">Computed Tomography</a></li>
 <li class="toctree-l1"><a class="reference internal" href="10_computing_eigenvalues.html">Computing Eigenvalues</a></li>
 <li class="toctree-l1"><a class="reference internal" href="12_fft.html">Discrete Fourier Transform</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Special solving functions</a></li>
-
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Gaussian Elimination</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
 <ul class="nav bd-sidenav">
@@ -390,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Special solving functions</h1>
+    <h1>Gaussian Elimination</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -400,10 +399,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Special solving functions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination">Gaussian Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-solving-functions">Special solving functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination-implementation">Gaussian Elimination implementation</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -414,7 +412,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="gaussian-elimination">
+<h1>Gaussian Elimination<a class="headerlink" href="#gaussian-elimination" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Math 545: uMass Amherst Spring 2024</span>
 <span class="o">%</span><span class="k">load_ext</span> autoreload
@@ -432,8 +432,8 @@ document.write(`
 </div>
 </div>
 </div>
-<section class="tex2jax_ignore mathjax_ignore" id="special-solving-functions">
-<h1>Special solving functions<a class="headerlink" href="#special-solving-functions" title="Permalink to this heading">#</a></h1>
+<section id="special-solving-functions">
+<h2>Special solving functions<a class="headerlink" href="#special-solving-functions" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">backSolve</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
@@ -458,8 +458,8 @@ document.write(`
 </div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="gaussian-elimination">
-<h1>Gaussian Elimination<a class="headerlink" href="#gaussian-elimination" title="Permalink to this heading">#</a></h1>
+<section id="gaussian-elimination-implementation">
+<h2>Gaussian Elimination implementation<a class="headerlink" href="#gaussian-elimination-implementation" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gaussElim</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
@@ -506,6 +506,7 @@ document.write(`
 </div>
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -575,10 +576,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Special solving functions</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination">Gaussian Elimination</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#special-solving-functions">Special solving functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-elimination-implementation">Gaussian Elimination implementation</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
