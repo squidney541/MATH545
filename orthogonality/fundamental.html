@@ -399,25 +399,33 @@ nullspace <span class="math notranslate nohighlight">\(N[A^T]\)</span> and the c
 <h2>Fundamental Subspaces<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <div class="definition docutils">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix. The <strong>fundamental subspaces</strong> of <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\(N[A]\)</span>, <span class="math notranslate nohighlight">\(R[A]\)</span>, <span class="math notranslate nohighlight">\(N[A^T]\)</span> and <span class="math notranslate nohighlight">\(R[A^T]\)</span>.</p>
-<p>The nullspace of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all vector such that <span class="math notranslate nohighlight">\(Ax  = 0\)</span>,</p>
+<ol class="arabic simple">
+<li><p>The <strong>nullspace</strong> of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all vector such that <span class="math notranslate nohighlight">\(Ax  = 0\)</span>,</p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[
     N[A] := \left\{ x \in \mathbb{R}^n : A x = 0 \right\} \subset \mathbb{R}^n.
 \]</div>
 <p>In other words, it contains the weights so that a linear combination of the columns of <span class="math notranslate nohighlight">\(A\)</span> is zero.</p>
-<p>The column space or range of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all linear combinations of the columns of <span class="math notranslate nohighlight">\(A\)</span>.</p>
+<ol class="arabic simple" start="2">
+<li><p>The <strong>column space</strong> or range of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all linear combinations of the columns of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[
     R[A] := \left\{ A x : x \in \mathbb{R}^n \right\} \subset \mathbb{R}^m.
 \]</div>
-<p>The row space is the space of all linear combinations of the rows of the matrix <span class="math notranslate nohighlight">\(A\)</span>, or
+<ol class="arabic simple" start="3">
+<li><p>The <strong>row space</strong> is the space of all linear combinations of the rows of the matrix <span class="math notranslate nohighlight">\(A\)</span>, or
 equivalently it is the space of all the linear combinations of the columns of <span class="math notranslate nohighlight">\(A^T\)</span> (i.e.
-the column space of <span class="math notranslate nohighlight">\(A^T\)</span>),</p>
+the column space of <span class="math notranslate nohighlight">\(A^T\)</span>),</p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[
     R[A^T] := \left\{ A^T x : x \in \mathbb{R}^m \right\} \subset \mathbb{R}^n.
 \]</div>
-<p>The left nullspace of <span class="math notranslate nohighlight">\(A\)</span> is the null space of <span class="math notranslate nohighlight">\(A^T\)</span>.</p>
+<ol class="arabic simple" start="4">
+<li><p>The <strong>left nullspace</strong> of <span class="math notranslate nohighlight">\(A\)</span> is the null space of <span class="math notranslate nohighlight">\(A^T\)</span>.</p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[
     N[A^T] := \left\{ y \in \mathbb{R}^m : A^T y = 0 \right\} \subset \mathbb{R}^m.
