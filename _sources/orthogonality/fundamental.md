@@ -18,12 +18,15 @@ nullspace $N[A^T]$ and the column space $R[A]$ are orthogonal complements.
 Let $A$ be a $m \times n$ matrix. The **fundamental subspaces** of $A$ are $N[A]$, $R[A]$, $N[A^T]$ and $R[A^T]$.
 
 The nullspace of the matrix $A$ is the space of all vector such that $Ax  = 0$,
+
 $$
     N[A] := \left\{ x \in \mathbb{R}^n : A x = 0 \right\} \subset \mathbb{R}^n.
 $$
+
 In other words, it contains the weights so that a linear combination of the columns of $A$ is zero.
 
 The column space or range of the matrix $A$ is the space of all linear combinations of the columns of $A$.
+
 $$
     R[A] := \left\{ A x : x \in \mathbb{R}^n \right\} \subset \mathbb{R}^m.
 $$
@@ -31,6 +34,7 @@ $$
 The row space is the space of all linear combinations of the rows of the matrix $A$, or
 equivalently it is the space of all the linear combinations of the columns of $A^T$ (i.e.
 the column space of $A^T$),
+
 $$
     R[A^T] := \left\{ A^T x : x \in \mathbb{R}^m \right\} \subset \mathbb{R}^n.
 $$
