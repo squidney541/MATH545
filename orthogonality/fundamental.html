@@ -372,6 +372,8 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fundamental Subspaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-for-the-foundamental-subspaces">Basis for the foundamental subspaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonality-of-the-fundamental-subspaces">Orthogonality of the fundamental subspaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
             </nav>
@@ -396,8 +398,40 @@ nullspace <span class="math notranslate nohighlight">\(N[A^T]\)</span> and the c
 <section id="id1">
 <h2>Fundamental Subspaces<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <div class="definition docutils">
-<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix. The <strong>fundamental subspaces</strong> of <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\(N(A)\)</span>, <span class="math notranslate nohighlight">\(R(A)\)</span>, <span class="math notranslate nohighlight">\(N(A^T)\)</span> and <span class="math notranslate nohighlight">\(R(A^T)\)</span>.</p>
+<p>Let <span class="math notranslate nohighlight">\(A\)</span> be a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix. The <strong>fundamental subspaces</strong> of <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\(N[A]\)</span>, <span class="math notranslate nohighlight">\(R[A]\)</span>, <span class="math notranslate nohighlight">\(N[A^T]\)</span> and <span class="math notranslate nohighlight">\(R[A^T]\)</span>.</p>
+<p>The nullspace of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all vector such that <span class="math notranslate nohighlight">\(Ax  = 0\)</span>,
+$<span class="math notranslate nohighlight">\(
+    N[A] := \left\{ x \in \mathbb{R}^n : A x = 0 \right\} \subset \mathbb{R}^n.
+\)</span><span class="math notranslate nohighlight">\(
+In other words, it contains the weights so that a linear combination of the columns of \)</span>A$ is zero.</p>
+<p>The column space or range of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all linear combinations of the columns of <span class="math notranslate nohighlight">\(A\)</span>.
+$<span class="math notranslate nohighlight">\(
+    R[A] := \left\{ A x : x \in \mathbb{R}^n \right\} \subset \mathbb{R}^m.
+\)</span>$</p>
+<p>The row space is the space of all linear combinations of the rows of the matrix <span class="math notranslate nohighlight">\(A\)</span>, or
+equivalently it is the space of all the linear combinations of the columns of <span class="math notranslate nohighlight">\(A^T\)</span> (i.e.
+the column space of <span class="math notranslate nohighlight">\(A^T\)</span>),
+$<span class="math notranslate nohighlight">\(
+    R[A^T] := \left\{ A^T x : x \in \mathbb{R}^m \right\} \subset \mathbb{R}^n.
+\)</span>$</p>
+<p>The left nullspace of <span class="math notranslate nohighlight">\(A\)</span> is the null space of <span class="math notranslate nohighlight">\(A^T\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    N[A^T] := \left\{ y \in \mathbb{R}^m : A^T y = 0 \right\} \subset \mathbb{R}^m.
+\]</div>
+<p>It is called the left nullspace since <span class="math notranslate nohighlight">\((A^T y)^T = 0^T \implies \)</span>y^T A = 0<span class="math notranslate nohighlight">\(, note the
+multiplication from the left. In other words, it contains the weights so that
+a linear combination of the rows of \)</span>A$ is zero.</p>
 </div>
+</section>
+<section id="basis-for-the-foundamental-subspaces">
+<h2>Basis for the foundamental subspaces<a class="headerlink" href="#basis-for-the-foundamental-subspaces" title="Permalink to this heading">#</a></h2>
+<p>The goal is to understand the four fundmental subspaces better. With understand we here
+mean determine a basis and the dimension of the subspace (i.e. the number of linearly independent
+vectors in the basis).</p>
+</section>
+<section id="orthogonality-of-the-fundamental-subspaces">
+<h2>Orthogonality of the fundamental subspaces<a class="headerlink" href="#orthogonality-of-the-fundamental-subspaces" title="Permalink to this heading">#</a></h2>
 <div class="theorem docutils">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix. Then <span class="math notranslate nohighlight">\(N(A) = R(A^T)^{\perp}\)</span> and <span class="math notranslate nohighlight">\(R(A) = N(A^T)^{\perp}\)</span>.</p>
 <hr class="docutils" />
@@ -595,6 +629,8 @@ Solution<div class="sd-summary-down docutils">
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Fundamental Subspaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basis-for-the-foundamental-subspaces">Basis for the foundamental subspaces</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonality-of-the-fundamental-subspaces">Orthogonality of the fundamental subspaces</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercises">Exercises</a></li>
 </ul>
   </nav></div>
