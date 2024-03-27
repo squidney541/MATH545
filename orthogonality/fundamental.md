@@ -17,13 +17,12 @@ nullspace $N[A^T]$ and the column space $R[A]$ are orthogonal complements.
 ```{div} definition
 Let $A$ be a $m \times n$ matrix. The **fundamental subspaces** of $A$ are $N[A]$, $R[A]$, $N[A^T]$ and $R[A^T]$.
 
-1. The **nullspace** of the matrix $A$ is the space of all vector such that $Ax  = 0$,
+1. The **nullspace** of the matrix $A$ is the space of all vector such that $Ax  = 0$, in
+other words it contains weights of linear combinations that vanish.
 
 $$
     N[A] := \left\{ x \in \mathbb{R}^n : A x = 0 \right\} \subset \mathbb{R}^n.
 $$
-
-In other words, it contains the weights so that a linear combination of the columns of $A$ is zero.
 
 2. The **column space** or range of the matrix $A$ is the space of all linear combinations of the columns of $A$.
 
@@ -45,9 +44,10 @@ $$
     N[A^T] := \left\{ y \in \mathbb{R}^m : A^T y = 0 \right\} \subset \mathbb{R}^m.
 $$
 
-It is called the left nullspace since $(A^T y)^T = 0^T \implies $y^T A = 0$, note the
+It is called the left nullspace since $(A^T y)^T = 0^T \implies y^T A = 0$, note the
 multiplication from the left. In other words, it contains the weights so that
 a linear combination of the rows of $A$ is zero.
+
 ```
 
 ## Basis for the foundamental subspaces
