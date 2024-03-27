@@ -400,13 +400,13 @@ nullspace <span class="math notranslate nohighlight">\(N[A^T]\)</span> and the c
 <div class="definition docutils">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be a <span class="math notranslate nohighlight">\(m \times n\)</span> matrix. The <strong>fundamental subspaces</strong> of <span class="math notranslate nohighlight">\(A\)</span> are <span class="math notranslate nohighlight">\(N[A]\)</span>, <span class="math notranslate nohighlight">\(R[A]\)</span>, <span class="math notranslate nohighlight">\(N[A^T]\)</span> and <span class="math notranslate nohighlight">\(R[A^T]\)</span>.</p>
 <ol class="arabic simple">
-<li><p>The <strong>nullspace</strong> of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all vector such that <span class="math notranslate nohighlight">\(Ax  = 0\)</span>,</p></li>
+<li><p>The <strong>nullspace</strong> of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all vector such that <span class="math notranslate nohighlight">\(Ax  = 0\)</span>, in
+other words it contains weights of linear combinations that vanish.</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[
     N[A] := \left\{ x \in \mathbb{R}^n : A x = 0 \right\} \subset \mathbb{R}^n.
 \]</div>
-<p>In other words, it contains the weights so that a linear combination of the columns of <span class="math notranslate nohighlight">\(A\)</span> is zero.</p>
 <ol class="arabic simple" start="2">
 <li><p>The <strong>column space</strong> or range of the matrix <span class="math notranslate nohighlight">\(A\)</span> is the space of all linear combinations of the columns of <span class="math notranslate nohighlight">\(A\)</span>.</p></li>
 </ol>
@@ -430,9 +430,9 @@ the column space of <span class="math notranslate nohighlight">\(A^T\)</span>),<
 \[
     N[A^T] := \left\{ y \in \mathbb{R}^m : A^T y = 0 \right\} \subset \mathbb{R}^m.
 \]</div>
-<p>It is called the left nullspace since <span class="math notranslate nohighlight">\((A^T y)^T = 0^T \implies \)</span>y^T A = 0<span class="math notranslate nohighlight">\(, note the
+<p>It is called the left nullspace since <span class="math notranslate nohighlight">\((A^T y)^T = 0^T \implies y^T A = 0\)</span>, note the
 multiplication from the left. In other words, it contains the weights so that
-a linear combination of the rows of \)</span>A$ is zero.</p>
+a linear combination of the rows of <span class="math notranslate nohighlight">\(A\)</span> is zero.</p>
 </div>
 </section>
 <section id="basis-for-the-foundamental-subspaces">
