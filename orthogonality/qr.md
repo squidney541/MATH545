@@ -1,7 +1,7 @@
 # QR Decomposition
 
 ```{div} bigidea
-If $A$ is a $m \times n$ matrix with $\mathrm{rank}(A) = n$, then the decomposition $A = QR$ provides orthonormal bases of both $R(A)$ and $R(A)^{\perp}$. In particular, write $Q = [Q_1 \ Q_2]$ where $Q_1$ is the first $n$ columns of $Q$, then the columns of $Q_1$ provide an orthonormal basis of $R(A)$ and the columns of $Q_2$ provide an orthonormal basis of $R(A)^{\perp}$. 
+If $A$ is a $m \times n$ matrix with $\mathrm{rank}(A) = n$, then the decomposition $A = QR$ provides orthonormal bases of both $R(A)$ and $R(A)^{\perp}$. In particular, write $Q = [Q_1 \ Q_2]$ where $Q_1$ is the first $n$ columns of $Q$, then the columns of $Q_1$ provide an orthonormal basis of $R(A)$ and the columns of $Q_2$ provide an orthonormal basis of $R(A)^{\perp}$.
 ```
 
 ```{image} /img/02_04_01.png
@@ -12,7 +12,7 @@ If $A$ is a $m \times n$ matrix with $\mathrm{rank}(A) = n$, then the decomposit
 ## Orthogonal Matrices
 
 ```{div} definition
-A matrix $A$ is **orthogonal** if $A^TA = AA^T = I$.
+A **square** matrix $A$ is **orthogonal** if $A^TA = AA^T = I$.
 ```
 
 ```{div} note
