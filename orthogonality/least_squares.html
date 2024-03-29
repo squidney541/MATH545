@@ -401,6 +401,35 @@ document.write(`
 </section>
 <section id="normal-equations">
 <h2>Normal Equations<a class="headerlink" href="#normal-equations" title="Permalink to this heading">#</a></h2>
+<p>Let <span class="math notranslate nohighlight">\(U \subseteq \mathbb{R}^n\)</span> be a subspace and let <span class="math notranslate nohighlight">\(\{ \boldsymbol{u}_1, \dots, \boldsymbol{u}_m \}\)</span> be a basis (not necessarily orthogonal). Assemble the matrix <span class="math notranslate nohighlight">\(A\)</span> by setting the columns equal to the basis vectors of <span class="math notranslate nohighlight">\(U\)</span>. Then the projection of the vector <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> onto <span class="math notranslate nohighlight">\(U\)</span> is equivalent to determine the linaer combination <span class="math notranslate nohighlight">\(A\boldsymbol{y}\)</span> closest to <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span>.
+From the geometry we expect that the error <span class="math notranslate nohighlight">\(\boldsymbol{e} = \boldsymbol{x} - A\boldsymbol{y}\)</span> be perpendicular to the subspace <span class="math notranslate nohighlight">\(U\)</span>. Equivalently perpendicular to all the basis vectors of the subspace <span class="math notranslate nohighlight">\(U\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{array}{cc}
+\boldsymbol{u}_1^T \left( \boldsymbol{x} - A\boldsymbol{y}\right) &amp;= 0 \\
+\boldsymbol{u}_2^T \left( \boldsymbol{x} - A\boldsymbol{y}\right) &amp;= 0 \\
+\vdots &amp;= \vdots \\
+\boldsymbol{u}_m^T \left( \boldsymbol{x} - A\boldsymbol{y}\right) &amp;= 0 \\
+\end{array}
+\end{split}\]</div>
+<p>Assembling this into matrix form this becomes</p>
+<div class="math notranslate nohighlight">
+\[
+    A^T \left( \boldsymbol{x} - A\boldsymbol{y} \right) = 0 \quad\iff\quad A^T A \boldsymbol{y} = A^T \boldsymbol{x}.
+\]</div>
+<div class="note docutils">
+<p>Note that <span class="math notranslate nohighlight">\(U = R[A]\)</span> and so <span class="math notranslate nohighlight">\(\boldsymbol{e} \in R[A]^\perp = N[A^T]\)</span>.</p>
+</div>
+<div class="note docutils">
+<p>Is <span class="math notranslate nohighlight">\(A^T A\)</span> invertible? Yes if <span class="math notranslate nohighlight">\(\rank(A) = n = \rank(A^T)\)</span>.</p>
+</div>
+<p>This means that we can determine <span class="math notranslate nohighlight">\(\boldsymbol{y}\)</span> uniquely by solving the above linear system. In particular, this means that</p>
+<div class="math notranslate nohighlight">
+\[
+\boldsymbol{y} = \left(A^T A \right)^{-1} A^T \boldsymbol{x} \quad\mbox{and}\quad
+p = A\boldsymbol{y} = A\left(A^T A \right)^{-1} A^T \boldsymbol{x}
+\]</div>
+<p>Thus the projection matrix onto the subspace <span class="math notranslate nohighlight">\(U\)</span> is given by <span class="math notranslate nohighlight">\(P := A\left(A^T A \right)^{-1} A^T\)</span>.</p>
 <div class="theorem docutils">
 <p>Let <span class="math notranslate nohighlight">\(A\)</span> be an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix with <span class="math notranslate nohighlight">\(m &gt; n\)</span> and <span class="math notranslate nohighlight">\(\mathrm{rank}(A) = n\)</span>. The least squares approximation of the system <span class="math notranslate nohighlight">\(A \boldsymbol{x} \approx \boldsymbol{b}\)</span> is the solution of the system</p>
 <div class="math notranslate nohighlight">
