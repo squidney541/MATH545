@@ -209,6 +209,10 @@ and $\mathrm{proj}_U(\boldsymbol{x})$ is the closest vector in $U$ to $\boldsymb
 $$
 \| \boldsymbol{x} - \mathrm{proj}_U(\boldsymbol{x}) \| < \| \boldsymbol{x} - \boldsymbol{y} \| \hspace{5mm} \text{ for all } \boldsymbol{y} \in U \ , \ \boldsymbol{y} \not= \mathrm{proj}_U(\boldsymbol{x})
 $$
+
+---
+
+*Proof.* The proof will be given by the QR decomposition later.
 ```
 
 ## Exercises

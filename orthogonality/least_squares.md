@@ -17,6 +17,42 @@ Let $A$ be an $m \times n$ matrix with $m > n$ and $\mathrm{rank}(A) = n$. The *
 
 ## Normal Equations
 
+
+Let $U \subseteq \mathbb{R}^n$ be a subspace and let $\{ \boldsymbol{u}_1, \dots, \boldsymbol{u}_m \}$ be a basis (not necessarily orthogonal). Assemble the matrix $A$ by setting the columns equal to the basis vectors of $U$. Then the projection of the vector $\boldsymbol{x}$ onto $U$ is equivalent to determine the linaer combination $A\boldsymbol{y}$ closest to $\boldsymbol{x}$.
+From the geometry we expect that the error $\boldsymbol{e} = \boldsymbol{x} - A\boldsymbol{y}$ be perpendicular to the subspace $U$. Equivalently perpendicular to all the basis vectors of the subspace $U$.
+
+$$
+\begin{array}{cc}
+\boldsymbol{u}_1^T \left( \boldsymbol{x} - A\boldsymbol{y}\right) &= 0 \\
+\boldsymbol{u}_2^T \left( \boldsymbol{x} - A\boldsymbol{y}\right) &= 0 \\
+\vdots &= \vdots \\
+\boldsymbol{u}_m^T \left( \boldsymbol{x} - A\boldsymbol{y}\right) &= 0 \\
+\end{array}
+$$
+
+Assembling this into matrix form this becomes
+
+$$
+    A^T \left( \boldsymbol{x} - A\boldsymbol{y} \right) = 0 \quad\iff\quad A^T A \boldsymbol{y} = A^T \boldsymbol{x}.
+$$
+
+```{div} note
+Note that $U = R[A]$ and so $\boldsymbol{e} \in R[A]^\perp = N[A^T]$.
+```
+
+```{div} note
+Is $A^T A$ invertible? Yes if $\rank(A) = n = \rank(A^T)$.
+```
+
+This means that we can determine $\boldsymbol{y}$ uniquely by solving the above linear system. In particular, this means that
+
+$$
+\boldsymbol{y} = \left(A^T A \right)^{-1} A^T \boldsymbol{x} \quad\mbox{and}\quad
+p = A\boldsymbol{y} = A\left(A^T A \right)^{-1} A^T \boldsymbol{x}
+$$
+
+Thus the projection matrix onto the subspace $U$ is given by $P := A\left(A^T A \right)^{-1} A^T$.
+
 ````{div} theorem
 Let $A$ be an $m \times n$ matrix with $m > n$ and $\mathrm{rank}(A) = n$. The least squares approximation of the system $A \boldsymbol{x} \approx \boldsymbol{b}$ is the solution of the system
 
