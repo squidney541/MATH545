@@ -103,7 +103,7 @@ $$
 \hspace{5mm}
 \boldsymbol{w}_2 = \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
 \hspace{5mm}
-\boldsymbol{w}_3 = \frac{1}{\sqrt{2}} \left[ \begin{array}{r} 1 \\ 0 \\ -1 \end{array} \right]
+\boldsymbol{w}_3 = \frac{1}{2} \left[ \begin{array}{r} 1 \\ 0 \\ -1 \end{array} \right]
 $$
 
 Therefore
@@ -111,9 +111,9 @@ Therefore
 $$
 Q =
 \begin{bmatrix}
-1/\sqrt{2} & 0 & 1/\sqrt{2} \\
+1/\sqrt{2} & 0 & 1/2 \\
 0 & 1 & 0 \\
-1/\sqrt{2} & 0 & -1/\sqrt{2}
+1/\sqrt{2} & 0 & -1/2
 \end{bmatrix}
 $$
 
@@ -130,7 +130,7 @@ R =
 \begin{bmatrix}
 \sqrt{2} & \sqrt{2} & 1/\sqrt{2} \\
 0 & 1 & 1 \\
-0 & 0 & 1/\sqrt{2}
+0 & 0 & 1/2
 \end{bmatrix}
 $$
 ```
