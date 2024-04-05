@@ -101,7 +101,7 @@ $$
 $$
 ```
 
-## Projection onto a Subpsace
+## Projection onto a Subspace
 
 ```{div} definition
 Let $U \subseteq \mathbb{R}^n$ be a subspace and let $\{ \boldsymbol{u}_1, \dots, \boldsymbol{u}_m \}$ be an orthogonal basis of $U$. The **projection** of a vector $\boldsymbol{x}$ onto $U$ is
