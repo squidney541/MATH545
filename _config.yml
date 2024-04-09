@@ -12,6 +12,6 @@ html:
   use_repository_button: true
   google_analytics_id:
 launch_buttons:
-  jupyterhub_url: https://colab.research.google.com
+  colab_url: "https://colab.research.google.com"
 repository:
   url: https://github.com/adrs0049/MATH545
