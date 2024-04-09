@@ -50,13 +50,6 @@ a linear combination of the rows of $A$ is zero.
 
 ```
 
-## Basis for the fundamental subspaces
-
-The goal is to understand the four fundmental subspaces better. With understand we here
-mean determine a basis and the dimension of the subspace (i.e. the number of linearly independent
-vectors in the basis).
-
-
 ## Orthogonality of the fundamental subspaces
 
 ```{div} theorem
