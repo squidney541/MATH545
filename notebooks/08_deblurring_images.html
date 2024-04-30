@@ -420,7 +420,10 @@ document.write(`
 <h1>Deblurring Images<a class="headerlink" href="#deblurring-images" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">scipy.io</span> <span class="kn">import</span> <span class="n">loadmat</span>
@@ -558,7 +561,9 @@ A_c X A_r^T = B + E
 <p>How do we find <span class="math notranslate nohighlight">\(X\)</span>?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kitten</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;data/kitten.jpg&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/adrs0049/MATH545/master/notebooks/data/kitten.jpg&#39;</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">kitten</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">content</span><span class="p">)))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -601,7 +606,7 @@ A_c X A_r^T = B + E
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/5e636c8edcdd8f5acf3fa10215de18148a74aeb92a028ac668a8af34b2cb8be2.png" src="../_images/5e636c8edcdd8f5acf3fa10215de18148a74aeb92a028ac668a8af34b2cb8be2.png" />
+<img alt="../_images/27e42eaa07f21f2cc9a2cffd6ddd73fd30f2d99f553932994d7dd716c66e8eee.png" src="../_images/27e42eaa07f21f2cc9a2cffd6ddd73fd30f2d99f553932994d7dd716c66e8eee.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -621,7 +626,7 @@ A_c X A_r^T = B + E
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8dfd112bf92d1e3a9e781f92765b172f5aa475daeeeab8759d62f8cfcdde56c6.png" src="../_images/8dfd112bf92d1e3a9e781f92765b172f5aa475daeeeab8759d62f8cfcdde56c6.png" />
+<img alt="../_images/22273db4758f8c85848c746a54132dba82a1b1075a7fe9f7834ee70a14944177.png" src="../_images/22273db4758f8c85848c746a54132dba82a1b1075a7fe9f7834ee70a14944177.png" />
 </div>
 </div>
 </section>
@@ -660,7 +665,7 @@ X = (A_c)_k^+ B (A_r^T)_k^+
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/c722c744e53d00765b1064ed74203c8f46bc3fe387d658c7b68fc95e30136c52.png" src="../_images/c722c744e53d00765b1064ed74203c8f46bc3fe387d658c7b68fc95e30136c52.png" />
+<img alt="../_images/19ae3544933135c2169cea95146e964955d2fac15085482aad09e0fb18227c4e.png" src="../_images/19ae3544933135c2169cea95146e964955d2fac15085482aad09e0fb18227c4e.png" />
 </div>
 </div>
 </section>
