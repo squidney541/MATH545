@@ -2,6 +2,7 @@ title: Applied Linear Algebra
 author: UBC Math and changes by Andreas Buttenschoen and many students of MATH545.
 logo: img/nn.png
 copyright : "2024"
+use_issues_button : true 
 sphinx:
   config:
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
