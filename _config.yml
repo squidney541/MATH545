@@ -1,6 +1,7 @@
 title: Applied Linear Algebra
 author: UBC Math and adapted by Andreas Buttenschoen
 logo: img/nn.png
+copyright : "2024"
 sphinx:
   config:
     mathjax_path: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
